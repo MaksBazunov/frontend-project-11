@@ -7,7 +7,10 @@ const view = (status, message) => {
       if (oldP) oldP.remove();
   
       const input = document.querySelector('#url-input');
-  
+
+      if (input.hasAttribute('is-valid')) input.removeAttribute('is-valid');
+      if (input.hasAttribute('is-invalid')) input.removeAttribute('is-invalid');
+      
       const p = document.createElement('p');
       p.textContent = message;
       columnForm.append(p);
@@ -15,11 +18,13 @@ const view = (status, message) => {
       if (status) {
         input.value = '';
         input.focus();
-        p.classList.add('text-success');
+        p.setAttribute('text-success');
+        input.setAttribute('is-valid');
         return;
       }
   
-      p.classList.add('text-danger');
+      p.setAttribute('text-danger');
+      input.setAttribute('is-invalid');
     } catch (e) {
       console.log(e, 'view');
     }

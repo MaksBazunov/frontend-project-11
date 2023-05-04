@@ -1,6 +1,7 @@
 const view = (status, message) => {
-    console.log(status, message, 'view');
+   
     try {
+      document.querySelector('.btn-primary').setAttribute('disable', '');
       const columnForm = document.querySelector('[data-column-form]');
       console.log(columnForm);
       const oldP = document.querySelector('.feedback');

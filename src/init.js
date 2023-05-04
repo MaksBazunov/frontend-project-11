@@ -15,6 +15,10 @@ const runApp = () => {
 promise.then((i18nInst) => {
   const state = {
     i18n: i18nInst,
+    process: null,
+    resultOfAxios: {
+      title:
+    },
     resultOfValidation: {
       message: null,
       isValid: { status: false },

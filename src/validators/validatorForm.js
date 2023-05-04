@@ -8,7 +8,6 @@ const validatorForm = (i18n, content) => {
     },
     string: {
       url: i18n.t('isNotURL'),
-      matches: i18n.t('isNotRssURL'),
       required: i18n.t('isNotURL'),
     },
   });
@@ -16,8 +15,7 @@ const validatorForm = (i18n, content) => {
     rssUrl: yup.string()
       .required()
       .url()
-      .trim()
-      .matches(/.rss$/),
+      .trim(),
   });
   return shema.validate({ rssUrl: content });
 };

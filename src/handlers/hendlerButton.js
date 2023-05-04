@@ -9,14 +9,14 @@ const handlerButton = (watcher, input) => {
     validatorForm(watcher.i18n, content)
     .then(({ rssUrl: resultOfValidation }) => {
       console.log(resultOfValidation);
-      // console.log(watcher.feeds.includes(resultOfValidation), watcher.feeds, 'hello');
         if (watcher.feeds.includes(resultOfValidation)) throw new Error(watcher.i18n.t('urlInAddedResources'));
-        watcher.feeds.push(resultOfValidation);
+        watcher.feeds.push({ id: watcher.feeds.length, value: resultOfValidation });
         watcher.resultOfValidation.message = watcher.i18n.t('isValid');
         watcher.resultOfValidation.isValid.status = true;
+        warther.process = 'loading';
+        handlerRSSPosts(watcher.feeds);
       })
       .catch((err) => {
-         // console.log(JSON.stringify(err, null, 4), 'aaasdfasdf');
         if (_.has(err, 'errors')) {
           const [error] = err.errors;
           watcher.resultOfValidation.message = error;

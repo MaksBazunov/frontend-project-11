@@ -3,7 +3,7 @@ const view = (status, message) => {
     try {
       const columnForm = document.querySelector('[data-column-from]');
   
-      const oldP = col.querySelector('p');
+      const oldP = columnForm.querySelector('p');
       if (oldP) oldP.remove();
   
       const input = document.querySelector('#url-input');

@@ -1,21 +1,17 @@
-
-import onChange from 'on-change';
-import viewValid from './view/viewValid.js';
-import viewRssPosts from './view/viewRssPosts.js';
+/* eslint-disable no-undef */
+import { watcherValidation, watcherFillingDataForRss } from './view/watchers';
 import handlerButton from './handlers/handlerButton.js';
 import handlerInput from './handlers/handlerInput.js';
 
 const app = (state) => {
-  const watcher = onChange(state, (path, validationStatus) => {
-    if (path !== 'resultOfValidation.isValid.status' || validationStatus === null) return;
-    viewValid(validationStatus, watcher.resultOfValidation.message);
-    if (validationStatus === true) viewRssPosts(watcher.feeds);
-  });
-  
+ 
   const input = document.querySelector('#url-input');
   input.focus();
-  handlerInput(watcher, input);
-  handlerButton(watcher, input);
+  const watcherValid = watcherValidation(state);
+  const watcherFillingDataForRSS = watcherFillingDataForRss(state);
+  console.log(watcherFillingDataForRSS);
+  handlerInput(watcherValid, input);
+  handlerButton(watcherValid, watcherFillingDataForRSS, state.i18n, input);
 };
 
 export default app;

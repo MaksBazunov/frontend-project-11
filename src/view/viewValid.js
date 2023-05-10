@@ -1,4 +1,4 @@
-const view = (status, message) => {
+const renderValidation = (status, message) => {
    
     try {
       document.querySelector('.btn-primary').setAttribute('disable', '');
@@ -29,4 +29,4 @@ const view = (status, message) => {
     }
   };
   
-  export default view;
+  export default renderValidation;

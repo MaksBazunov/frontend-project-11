@@ -23,8 +23,8 @@ const handlerButton = (watcherValid, watcherFillingDataForRSS, i18n, input) => {
           watcherValid.isValid = false;
           return;
         }
-        watcher.resultOfValidation.message = err.message;
-        watcher.resultOfValidation.isValid.status = false;
+        watcherValid.message = err.message;
+        watcherValid.isValid = false;
       });
   });
 };

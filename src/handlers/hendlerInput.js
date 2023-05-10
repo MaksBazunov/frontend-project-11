@@ -1,8 +1,7 @@
-const handlerInput = (watcher, input) => {
+const handlerInput = (watcherValid, input) => {
     input.addEventListener('input', (e) => {
       e.preventDefault();
-      watcher.process = 'filling';
-      watcher.resultOfValidation.isValid.status = null;
+      watcherValid.isValid = null;
     });
 };
 export default handlerInput;

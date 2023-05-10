@@ -15,19 +15,21 @@ const runApp = () => {
 promise.then((i18nInst) => {
   const state = {
     i18n: i18nInst,
-    process: null,
-    resultOfAxios: {
-      title:
+    resultOfLoadingRss: {
+      resources: [],
+      feeds: [],
+      topics: [],
+      process: null, 
     },
     resultOfValidation: {
       message: null,
-      isValid: { status: false },
+      isValid: null,
     },
-    feeds: [],
   };
   return state;
 })
     .then((state) => {
+      console.log(state);
       app(state);
     })
     .catch((e) => {

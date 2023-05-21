@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { watcherValidation, watcherFillingDataForRss } from './view/watchers';
+import { watcherValidation, watcherFillingDataForRss } from './view/watchers.js';
 import handlerButton from './handlers/handlerButton.js';
 import handlerInput from './handlers/handlerInput.js';
 

@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import validateForm from '../validators/validatorForm';
-import isUniqRSSinFeeds from '../validators/validatorUniqUrlRSS';
+import validatorForm from '../validators/validatorForm.js';
+import isUniqRSSinFeeds from '../validators/validatorUniqUrlRSS.js';
 import handlerDataRSSPosts from './handlerDataRSSPosts.js';
 
 const handlerButton = (watcherValid, watcherFillingDataForRSS, i18n, input) => {
@@ -8,7 +8,7 @@ const handlerButton = (watcherValid, watcherFillingDataForRSS, i18n, input) => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const content = input.value;
-    validateForm(i18n, content)
+    validatorForm(i18n, content)
     .then(({ rssUrl: resultOfValidation }) => {
       if (!isUniqRSSinFeeds(watcherFillingDataForRSS.resources, resultOfValidation)) throw new Error(i18n.t('urlInAddedResources'));
       watcherValid.message = i18n.t('isValid');

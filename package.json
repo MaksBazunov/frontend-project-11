@@ -3,11 +3,7 @@
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/MaksBazunov/frontend-project-11/workflows/hexlet-check/badge.svg)](https://github.com/MaksBazunov/frontend-project-11/actions)",
   "type": "module",
-<<<<<<< HEAD
   "main": "./index.js",
-=======
-  "main": "src/runApp.js",
->>>>>>> 9f3492a2056b0efa759a49ff0bc5ff751bfe669f
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",

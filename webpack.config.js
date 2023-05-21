@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
+=======
+>>>>>>> 9f3492a2056b0efa759a49ff0bc5ff751bfe669f
 import * as path from 'path';
 // import { fileURLToPath } from 'url';
 // import { dirname } from 'path';
@@ -11,7 +14,11 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 export default {
   mode: 'development',
   entry: {
+<<<<<<< HEAD
     main: './index.js',
+=======
+    main: './src/runApp.js',
+>>>>>>> 9f3492a2056b0efa759a49ff0bc5ff751bfe669f
   },
   module: {
     rules: [

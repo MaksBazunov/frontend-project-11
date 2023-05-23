@@ -2,7 +2,6 @@
 import { watcherValidation, watcherFillingDataForRss } from './view/watchers.js';
 import handlerButton from './handlers/handlerButton.js';
 import handlerInput from './handlers/handlerInput.js';
-
 const app = (state) => {
   const input = document.querySelector('#url-input');
 

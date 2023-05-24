@@ -1,6 +1,7 @@
 const parserRSS = (response, id) => {
   const parser = new DOMParser();
   const data = parser.parseFromString(response.data.contents, 'text/xml');
+  console.log(data);
   const feed = {
     tittle: data.querySelector('channel').children[0].textContent,
     description: data.querySelector('channel').children[1].textContent,
@@ -12,7 +13,6 @@ const parserRSS = (response, id) => {
     description: data.querySelector('channel item').children[3].textContent,
     id,
   };
-  console.log(topic.link);
   return { feed, topic };
 };
 

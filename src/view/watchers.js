@@ -1,32 +1,27 @@
 import onChange from 'on-change';
 import renderValidation from '../renders/renderValid.js';
 import buttonActivityRender from '../renders/buttonActivityRender.js';
-import renderRssPosts from '../renders/renderRssPosts.js';
+import renderRssContent from '../renders/renderRssPosts.js';
 
-const watcherValidation = (state) => {
-  const watcher = onChange(state.resultOfValidation, (path, validationStatus) => {
-    if (path !== 'isValid' || validationStatus === null) return;
+const watcherValidationRssURL = (state) => {
+  const watcher = onChange(state.resultOfValidationRssUrl, (path, validationStatus) => {
+    if (path === 'message' && watcher.isValid === true) renderValidation(watcher.isValid, validationStatus);
+    if (validationStatus === null || path !== 'isValid') return;
     renderValidation(validationStatus, watcher.message);
   });
   return watcher;
 };
 
-const watcherFillingDataForRss = (state) => {
-  const watcher = onChange(state.resultOfLoadingRss, (path, value) => {
-    console.log(path, value);
-    switch (true) {
-      case (path === 'process' && value === 'loadingRSS'):
-        buttonActivityRender(value);
-        break;
-      case (path === 'process' && value === 'renderingRSS'):
-        renderRssPosts(watcher, state.i18n);
-        break;
-      default:
-        break;
-        // throw new Error(`${path} something wrong in watcherFillingDataForRss`);
-    }
+const watcherActivityButton = (state) => {
+  const watcher = onChange(state.process, (path, process) => buttonActivityRender(process));
+  return watcher;
+};
+
+const watcherLoadingRssContent = (state) => {
+  const watcher = onChange(state.resultOfLoadingRssContent, (path) => {
+    if (path === 'feeds') renderRssContent(watcher, state.i18n);
   });
   return watcher;
 };
 
-export { watcherValidation, watcherFillingDataForRss };
+export { watcherValidationRssURL, watcherActivityButton, watcherLoadingRssContent };

@@ -1,6 +1,5 @@
 
 const buildListGroupFeed = (feed, id) => {
-    console.log(feed);
   const listGroupFeed = document.createElement('ul');
   listGroupFeed.classList.add('list-group', 'border-0', 'rounded-0');
   listGroupFeed.setAttribute('id', id);

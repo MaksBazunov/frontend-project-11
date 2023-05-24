@@ -1,14 +1,15 @@
 const buttonActivityRender = (process) => {
+  console.log(process, 'process');
   const button = document.querySelector('.btn-primary');
   switch (true) {
-    case (process === 'loadingRss'):
+    case (process === 'loadingRssContent'):
       button.setAttribute('disabled', '');
       break;
-    case (process === 'loadedRss'):
+    case (process === 'fillingRssUrl'):
       button.removeAttribute('disabled');
       break;
     default:
-      throw new Error(`${process} something wrong`);
+      throw new Error(`${process} something wrong in activity Btn`);
   }
 };
 

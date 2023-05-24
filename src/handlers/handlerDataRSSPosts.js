@@ -1,23 +1,22 @@
 import axios from 'axios';
 import parserRSS from '../parsers/parserRss.js';
 
-const handlerDataRSSPosts = (watcherFillingDataForRSS, resultOfValidation) => {
-  watcherFillingDataForRSS.process = 'loadingRss';
-
-  const id = watcherFillingDataForRSS.resources.length;
-  watcherFillingDataForRSS.resources.push({ id, value: resultOfValidation });
+const handlerLoadingRSSContent = (watcherLoadingRSSContent, rssUrl) => {
+  const id = watcherLoadingRSSContent.resources.length;
+  watcherLoadingRSSContent.resources.push({ id, value: rssUrl });
 
   const proxy = 'https://allorigins.hexlet.app/get?';
-  axios.get(`${proxy}disableCache=true&url=${encodeURIComponent(resultOfValidation)}/`)
+  axios.get(`${proxy}disableCache=true&url=${encodeURIComponent(rssUrl)}/`)
     .then((response) => parserRSS(response, id))
     .then((parsedRss) => {
       const { feed, topic } = parsedRss;
-      watcherFillingDataForRSS.feeds.push(feed);
-      watcherFillingDataForRSS.topics.push(topic);
-      watcherFillingDataForRSS.process = 'renderingRSS';
-      watcherFillingDataForRSS.process = 'loadingRSS';
+      watcherLoadingRSSContent.topics.push(topic);
+      watcherLoadingRSSContent.feeds.push(feed);
     })
-    .catch((e) => console.log(e));
+    .catch((e) => {
+      console.log(e);
+      throw new Error(e);
+    });
 };
 
-export default handlerDataRSSPosts;
+export default handlerLoadingRSSContent;

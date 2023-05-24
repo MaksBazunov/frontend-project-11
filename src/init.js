@@ -1,5 +1,3 @@
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import i18next from 'i18next';
 import languages from './resources/languages.js';
 import app from './app.js';
@@ -17,31 +15,23 @@ const runApp = () => {
   promise.then((i18nInst) => {
     const state = {
       i18n: i18nInst,
-      feedbackMessage: null,
       process: {
         currentProcess: null, // fillingRssUrl, loadingRssContent
       },
-      resultOfRssContentLoading: {
-        errorLoading: null,
+      resultOfLoadingRssContent: {
         resources: [],
         feeds: [],
         topics: [],
-        updatingTopics: {
-          currentTimerID: null,
-          errorUpdating: null,
-        },
-        uiState: {
-          viewedTopics: [],
-          currentModalTopic: null,
-        },
       },
       resultOfValidationRssUrl: {
+        message: null,
         isValid: null,
       },
     };
     return state;
   })
     .then((state) => {
+      console.log(state);
       app(state);
     })
     .catch((e) => {

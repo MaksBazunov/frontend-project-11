@@ -1,24 +1,29 @@
+/* eslint-disable no-param-reassign */
 import axios from 'axios';
 import parserRSS from '../parsers/parserRss.js';
 
-const handlerLoadingRSSContent = (watcherLoadingRSSContent, rssUrl) => {
+const handlerLoadingRSSContent = (watcherLoadingRSSContent, rssUrl, state) => {
   const id = watcherLoadingRSSContent.resources.length;
   watcherLoadingRSSContent.resources.push({ id, value: rssUrl });
 
   const proxy = 'https://allorigins.hexlet.app/get?';
   axios.get(`${proxy}disableCache=true&url=${encodeURIComponent(rssUrl)}/`)
+    .catch(() => {
+      state.feedbackMessage = state.i18n.t('errorNetWork');
+      watcherLoadingRSSContent.errorLoading = true;
+    })
     .then((response) => parserRSS(response, id))
+    .catch(() => {
+      state.feedbackMessage = state.i18n.t('errorResource');
+      watcherLoadingRSSContent.errorLoading = true;
+    })
     .then((parsedRss) => {
       const { feed, topics } = parsedRss;
-      console.log(topics);
       topics.forEach((topic) => watcherLoadingRSSContent.topics.push(topic));
       watcherLoadingRSSContent.feeds.push(feed);
-      watcherLoadingRSSContent.addingCounter += 1;
-    })
-    .catch((e) => {
-      console.log(e)
-      watcherLoadingRSSContent.addingCounter = 0;
-      throw new Error(e);
+      state.feedbackMessage = state.i18n.t('isLoaded');
+      watcherLoadingRSSContent.errorLoading = false;
+      watcherLoadingRSSContent.errorLoading = null;
     });
 };
 

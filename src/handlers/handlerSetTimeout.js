@@ -1,21 +1,24 @@
+/* eslint-disable no-param-reassign */
+// eslint-disable-next-line import/no-cycle
 import handlerCheckingNewPostInResources from './handlerCheckingNewPostInResources.js';
 
-const handlerSetTimeout = (watcherLoadingRSSContent, status) => {
-  console.log('settedTimeout');
-  switch (true) {
-    case (status === true):
-      setTimeout(() => {
-        handlerCheckingNewPostInResources(watcherLoadingRSSContent);
-      }, 5000);
-      break;
-    case (status === false):
-      setTimeout(() => {
-        handlerCheckingNewPostInResources(watcherLoadingRSSContent);
-      }, 30000);
-      break;
-    default:
-      throw new Error('something Wrong in handlerSetTimeout');
+const handlerSetTimeout = (watcherLoadingRSSContent, state, status) => {
+  const timerID = watcherLoadingRSSContent.updatingTopics.currentTimerID;
+  if (timerID) clearTimeout(timerID);
+  console.log('setted');
+  if (status) {
+    const idCorrectTimer = setTimeout(() => {
+      handlerCheckingNewPostInResources(watcherLoadingRSSContent, state);
+      watcherLoadingRSSContent.updatingTopics.currentTimerID = idCorrectTimer;
+    }, 5000);
+    // eslint-disable-next-line max-len
+    return;
   }
+
+  const idWrongTimer = setTimeout(() => {
+    handlerCheckingNewPostInResources(watcherLoadingRSSContent, state);
+    watcherLoadingRSSContent.updatingTopics.currentTimerID = idWrongTimer;
+  }, 30000);
 };
 
 export default handlerSetTimeout;

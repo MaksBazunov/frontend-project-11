@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-
 import _ from 'lodash';
 import validateForm from '../validators/validatorForm.js';
 import isUniqRSSUrlinResources from '../validators/validatorUniqUrlRSS.js';
@@ -14,34 +13,30 @@ const handlerButton = (state, watcherValidationRSSUrl, watcherLoadingRSSContent,
     e.preventDefault();
     const content = input.value;
     validateForm(state.i18n, content)
+      .catch((err) => {
+        const [error] = err.errors;
+        state.feedbackMessage = error;
+        watcherValidationRSSUrl.isValid = false;
+      })
       .then(({ rssUrl }) => {
         if (!isUniqRSSUrlinResources(watcherLoadingRSSContent.resources, rssUrl)) throw new Error(state.i18n.t('isntUniqRSSUrl'));
         state.feedbackMessage = state.i18n.t('isValid');
         watcherValidationRSSUrl.isValid = true;
         return rssUrl;
       })
+      .catch((err) => {
+        state.feedbackMessage = err.message;
+        watcherValidationRSSUrl.isValid = false;
+      })
       .then((rssUrl) => {
-        console.log('second');
         watcherActivityBtn.currentProcess = 'loadingRssContent';
         return rssUrl;
       })
       .then((rssUrl) => {
-        handlerLoadingRSSContent(watcherLoadingRSSContent, rssUrl);
+        handlerLoadingRSSContent(watcherLoadingRSSContent, rssUrl, state);
       })
       .then(() => {
-        state.feedbackMessage = state.i18n.t('isLoaded');
         watcherActivityBtn.currentProcess = 'fillingRssUrl';
-      })
-      .catch((err) => {
-        console.log(err);
-        if (_.has(err, 'errors')) {
-          const [error] = err.errors;
-          state.feedbackMessage = error;
-          watcherValidationRSSUrl.isValid = false;
-          return;
-        }
-        state.feedbackMessage = err.message;
-        watcherValidationRSSUrl.isValid = false;
       });
   });
 };

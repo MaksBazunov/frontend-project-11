@@ -15,20 +15,16 @@ const runApp = () => {
   promise.then((i18nInst) => {
     const state = {
       i18n: i18nInst,
-      message: null,
-      counterHavePromisedTopics: {
-        sum: 0,
-      },
       process: {
         currentProcess: null, // fillingRssUrl, loadingRssContent
       },
       resultOfLoadingRssContent: {
-        addingCounter: 0,
         resources: [],
         feeds: [],
         topics: [],
       },
       resultOfValidationRssUrl: {
+        message: null,
         isValid: null,
       },
     };

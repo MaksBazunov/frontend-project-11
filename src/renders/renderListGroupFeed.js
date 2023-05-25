@@ -3,15 +3,15 @@ const buildListGroupFeed = (feed, id) => {
   listGroupFeed.classList.add('list-group', 'border-0', 'rounded-0');
   listGroupFeed.setAttribute('id', id);
 
-  const titleFeed = document.createElement('h3');
-  titleFeed.classList.add('h6', 'm-0');
-  titleFeed.textContent = feed.title;
+  const tittleFeed = document.createElement('h3');
+  tittleFeed.classList.add('h6', 'm-0');
+  tittleFeed.textContent = feed.tittle;
 
   const descriptionFeed = document.createElement('p');
   descriptionFeed.classList.add('m-0', 'small', 'text-black-50');
   descriptionFeed.textContent = feed.description;
 
-  listGroupFeed.append(titleFeed, descriptionFeed);
+  listGroupFeed.append(tittleFeed, descriptionFeed);
   return listGroupFeed;
 };
 

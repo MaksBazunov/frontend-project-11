@@ -1,13 +1,13 @@
 import onChange from 'on-change';
-import renderFeedback from '../renders/renderValid.js';
+import renderValidation from '../renders/renderValid.js';
 import buttonActivityRender from '../renders/buttonActivityRender.js';
 import renderRssContent from '../renders/renderRssPosts.js';
 
 const watcherValidationRssURL = (state) => {
   const watcher = onChange(state.resultOfValidationRssUrl, (path, validationStatus) => {
-    console.log(state.feedbackMessage);
-    if (validationStatus === null) return;
-    renderFeedback(validationStatus, state.feedbackMessage);
+    if (path === 'message' && watcher.isValid === true) renderValidation(watcher.isValid, validationStatus);
+    if (validationStatus === null || path !== 'isValid') return;
+    renderValidation(validationStatus, watcher.message);
   });
   return watcher;
 };
@@ -18,16 +18,10 @@ const watcherActivityButton = (state) => {
 };
 
 const watcherLoadingRssContent = (state) => {
-  const watcher = onChange(state.resultOfLoadingRssContent, (path, value, previouesValue) => {
-    if (path === 'addingCounter' && value > previouesValue) {
-      renderRssContent(watcher, state.i18n);
-      renderFeedback(true, state.feedbackMessage);
-    }
+  const watcher = onChange(state.resultOfLoadingRssContent, (path) => {
+    if (path === 'feeds') renderRssContent(watcher, state.i18n);
   });
   return watcher;
 };
 
-export {
-  watcherValidationRssURL, watcherActivityButton,
-  watcherLoadingRssContent,
-};
+export { watcherValidationRssURL, watcherActivityButton, watcherLoadingRssContent };

@@ -7,7 +7,7 @@ const buildListGroupTopic = (topic) => {
 
   const underTittleTopic = document.createElement('a');
   underTittleTopic.setAttribute('href', topic.link);
-  underTittleTopic.textContent = topic.title;
+  underTittleTopic.textContent = topic.tittle;
   tittleTopic.append(underTittleTopic);
 
   const descriptionTopic = document.createElement('p');

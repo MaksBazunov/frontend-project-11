@@ -1,11 +1,7 @@
 /* eslint-disable no-undef */
-import {
-  watcherValidationRssURL, watcherActivityButton,
-  watcherLoadingRssContent,
-} from './view/watchers.js';
+import { watcherValidationRssURL, watcherActivityButton, watcherLoadingRssContent } from './view/watchers.js';
 import handlerButton from './handlers/handlerButton.js';
 import handlerInput from './handlers/handlerInput.js';
-import handlerSetTimeout from './handlers/handlerSetTimeout.js';
 
 const app = (state) => {
   const input = document.querySelector('#url-input');
@@ -16,8 +12,7 @@ const app = (state) => {
 
   handlerInput(watcherValidationRSSUrl, input);
   // eslint-disable-next-line max-len
-  handlerButton(state, watcherValidationRSSUrl, watcherLoadingRSSContent, watcherActivityBtn, input);
-  handlerSetTimeout(watcherLoadingRSSContent, true);
+  handlerButton(watcherValidationRSSUrl, watcherLoadingRSSContent, watcherActivityBtn, state.i18n, input);
 };
 
 export default app;

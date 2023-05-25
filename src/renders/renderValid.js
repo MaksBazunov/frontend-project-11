@@ -1,4 +1,4 @@
-const renderFeedback = (status, message) => {
+const renderValidation = (status, message) => {
   try {
     const columnForm = document.querySelector('[data-column-form]');
     const oldP = document.querySelector('.feedback');
@@ -25,4 +25,4 @@ const renderFeedback = (status, message) => {
   }
 };
 
-export default renderFeedback;
+export default renderValidation;

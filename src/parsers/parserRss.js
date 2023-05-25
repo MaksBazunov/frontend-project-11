@@ -3,17 +3,19 @@ const parserRSS = (response, id) => {
   const data = parser.parseFromString(response.data.contents, 'text/xml');
   console.log(data);
   const feed = {
-    tittle: data.querySelector('channel').children[0].textContent,
-    description: data.querySelector('channel').children[1].textContent,
+    title: data.querySelector('channel title').textContent,
+    description: data.querySelector('channel description').textContent,
     id,
   };
-  const topic = {
-    tittle: data.querySelector('channel item').children[0].textContent,
-    link: data.querySelector('channel item').children[2].textContent,
-    description: data.querySelector('channel item').children[3].textContent,
+  console.log(data.querySelectorAll('item'));
+  const topics = Array.from(data.querySelectorAll('item')).map((item) => ({
+    title: item.querySelector('title').textContent,
+    link: item.querySelector('link').textContent,
+    description: item.querySelector('description').textContent,
     id,
-  };
-  return { feed, topic };
+  }));
+
+  return { feed, topics };
 };
 
 export default parserRSS;

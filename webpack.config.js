@@ -10,9 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 
 export default {
   mode: 'development',
-  entry: {
-    main: './index.js',
-  },
+  entry: './index.js',
   module: {
     rules: [
       { test: /\.css$/, use: ['style-loader', 'css-loader', 'postcss-loader'] },
@@ -24,7 +22,7 @@ export default {
   },
   output: {
     filename: '[name].[contenthash].js',
-    path: path.resolve('dist'),
+    path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
     new HtmlWebpackPlugin({

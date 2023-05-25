@@ -1,6 +1,6 @@
 const buttonActivityRender = (process) => {
   console.log(process, 'process');
-  const button = document.querySelector('.btn-primary');
+  const button = document.querySelector('.btn-form');
   switch (true) {
     case (process === 'loadingRssContent'):
       button.setAttribute('disabled', '');

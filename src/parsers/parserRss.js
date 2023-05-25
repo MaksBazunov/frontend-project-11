@@ -7,12 +7,18 @@ const parserRSS = (response, id) => {
       description: data.querySelector('channel description').textContent,
       id,
     };
-    const topics = Array.from(data.querySelectorAll('item')).map((item) => ({
-      title: item.querySelector('title').textContent,
-      link: item.querySelector('link').textContent,
-      description: item.querySelector('description').textContent,
-      id,
-    }));
+    let childrenId = id;
+    const topics = Array.from(data.querySelectorAll('item')).map((item) => {
+      const top = {
+        title: item.querySelector('title').textContent,
+        link: item.querySelector('link').textContent,
+        description: item.querySelector('description').textContent,
+        id,
+        childrenId: `#i${childrenId}`,
+      };
+      childrenId += 1;
+      return top;
+    });
 
     return { feed, topics };
   } catch {

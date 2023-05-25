@@ -1,21 +1,21 @@
 const buildListGroupTopic = (topic) => {
-  const listGroupTopic = document.createElement('ul');
-  listGroupTopic.classList.add('list-group', 'border-0', 'rounded-0');
+  const li = document.createElement('li');
+  li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0');
+  li.setAttribute('data-topic-id', topic.childrenId);
 
-  const tittleTopic = document.createElement('h3');
-  tittleTopic.classList.add('h6', 'm-0');
+  const tittleTopic = document.createElement('a');
+  tittleTopic.classList.add('fw-bold');
+  tittleTopic.setAttribute('href', topic.link);
+  tittleTopic.textContent = topic.title;
 
-  const underTittleTopic = document.createElement('a');
-  underTittleTopic.setAttribute('href', topic.link);
-  underTittleTopic.textContent = topic.title;
-  tittleTopic.append(underTittleTopic);
+  const modalButton = document.createElement('button');
+  modalButton.classList.add('btn', 'btn-outline-primary', 'btn-sm');
+  modalButton.setAttribute('data-bs-toggle', 'modal');
+  modalButton.setAttribute('data-bs-target', topic.childrenId);
+  modalButton.textContent = 'Просмотр';
 
-  const descriptionTopic = document.createElement('p');
-  descriptionTopic.classList.add('m-0', 'small', 'text-black-50');
-  descriptionTopic.textContent = topic.description;
-
-  listGroupTopic.append(tittleTopic, descriptionTopic);
-  return listGroupTopic;
+  li.append(tittleTopic, modalButton);
+  return li;
 };
 
 export default buildListGroupTopic;

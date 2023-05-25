@@ -14,7 +14,7 @@ const app = (state) => {
   const watcherLoadingRSSContent = watcherLoadingRssContent(state);
   const watcherActivityBtn = watcherActivityButton(state);
 
-  handlerInput(watcherValidationRSSUrl, input);
+  // handlerInput(watcherValidationRSSUrl, input);
   // eslint-disable-next-line max-len
   handlerButton(state, watcherValidationRSSUrl, watcherLoadingRSSContent, watcherActivityBtn, input);
   // handlerSetTimeout(watcherLoadingRSSContent, true);

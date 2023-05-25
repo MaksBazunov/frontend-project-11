@@ -24,19 +24,21 @@ const handlerButton = (state, watcherValidationRSSUrl, watcherLoadingRSSContent,
         watcherValidationRSSUrl.isValid = true;
         return rssUrl;
       })
-      .catch((err) => {
-        state.feedbackMessage = err.message;
-        watcherValidationRSSUrl.isValid = false;
-      })
       .then((rssUrl) => {
         watcherActivityBtn.currentProcess = 'loadingRssContent';
         return rssUrl;
       })
       .then((rssUrl) => {
-        handlerLoadingRSSContent(watcherLoadingRSSContent, rssUrl, state);
+        console.log('start');
+        handlerLoadingRSSContent(watcherLoadingRSSContent, watcherActivityBtn, rssUrl, state);
       })
       .then(() => {
-        watcherActivityBtn.currentProcess = 'fillingRssUrl';
+        console.log('end');
+        // watcherActivityBtn.currentProcess = 'fillingRssUrl';
+      })
+      .catch((err) => {
+        state.feedbackMessage = err.message;
+        watcherValidationRSSUrl.isValid = false;
       });
   });
 };

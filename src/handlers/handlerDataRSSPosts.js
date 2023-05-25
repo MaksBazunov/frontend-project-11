@@ -2,9 +2,8 @@
 import axios from 'axios';
 import parserRSS from '../parsers/parserRss.js';
 
-const handlerLoadingRSSContent = (watcherLoadingRSSContent, rssUrl, state) => {
+const handlerLoadingRSSContent = (watcherLoadingRSSContent, watcherActivityBtn, rssUrl, state) => {
   const id = watcherLoadingRSSContent.resources.length;
-  watcherLoadingRSSContent.resources.push({ id, value: rssUrl });
 
   const proxy = 'https://allorigins.hexlet.app/get?';
   axios.get(`${proxy}disableCache=true&url=${encodeURIComponent(rssUrl)}/`)
@@ -22,8 +21,12 @@ const handlerLoadingRSSContent = (watcherLoadingRSSContent, rssUrl, state) => {
       topics.forEach((topic) => watcherLoadingRSSContent.topics.push(topic));
       watcherLoadingRSSContent.feeds.push(feed);
       state.feedbackMessage = state.i18n.t('isLoaded');
+      watcherLoadingRSSContent.resources.push({ id, value: rssUrl });
       watcherLoadingRSSContent.errorLoading = false;
-      watcherLoadingRSSContent.errorLoading = null;
+      watcherActivityBtn.currentProcess = 'fillingRssUrl';
+    })
+    .catch(() => {
+      watcherActivityBtn.currentProcess = 'fillingRssUrl';
     });
 };
 

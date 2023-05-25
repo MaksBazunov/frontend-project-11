@@ -24,6 +24,10 @@ const runApp = () => {
           currentTimerID: null,
           errorUpdating: null,
         },
+        uiState: {
+          viewedTopics: [],
+          currentModal: null,
+        },
         errorLoading: null,
         resources: [],
         feeds: [],

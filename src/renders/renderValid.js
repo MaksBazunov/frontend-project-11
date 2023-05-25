@@ -1,6 +1,6 @@
 const renderFeedback = (status, message) => {
   try {
-    const columnForm = document.querySelector('[data-column-form]');
+    const columnForm = document.querySelector('[data-column-form="parent"]');
     const oldP = document.querySelector('.feedback');
     if (oldP) oldP.remove();
 

@@ -1,7 +1,6 @@
-const isUniqRSSUrlinResources = (resources, url) => {
-  const copies = resources.filter(({ value }) => value === url);
-  if (copies.length >= 1) return false;
-  return true;
+const isNewRSS = (resources, url) => {
+  const findedBrotherURL = resources.filter(({ value }) => value === url);
+  return findedBrotherURL.length !== 1;
 };
 
-export default isUniqRSSUrlinResources;
+export default isNewRSS;

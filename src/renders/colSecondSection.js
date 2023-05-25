@@ -9,7 +9,7 @@ const buildColumn = (text, i18n) => {
       break;
     default:
       throw new Error('something wrong in colSecondSection');
-  };
+  }
   const card = document.createElement('div');
   card.classList.add('card', 'border-0');
 
@@ -18,7 +18,7 @@ const buildColumn = (text, i18n) => {
 
   const cardTittle = document.createElement('card-tittle');
   cardTittle.classList.add('h4');
-  cardTittle.textContent = i18n.t(text);
+  cardTittle.textContent = i18n.t(`content.${text}`);
 
   cardBody.append(cardTittle);
   card.append(cardBody);

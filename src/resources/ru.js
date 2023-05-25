@@ -1,17 +1,32 @@
 export default {
   ru: {
     translation: {
-      isNotURL: 'Ссылка должна быть валидным URL',
-      isntUniqRSSUrl: 'RSS уже существует',
-      isNotRssURL: 'Ресурс не содержит валидный RSS',
-      isValid: 'RSS загружается',
-      isLoaded: 'RSS успешно загружен',
-      feeds: 'Фиды',
-      topics: 'Посты',
-      errorNetWork: 'Ошибка с доступа к ресурсу, проверьте соединение с интернетом',
-      errorResource: 'Ресурс не доступен',
-      errorNetWorkUpdating: 'Не удалось связаться с ресурсом, проверьте интернет',
-      errorResourceUpdating: 'Не удалось получить новые топики',
+      validation: {
+        errors: {
+          errorURL: 'Ссылка должна быть валидным URL',
+          errorUniqRSSUrl: 'RSS уже существует',
+          errorRequared: 'Не должно быть пустым',
+        },
+        isValid: 'RSS загружается',
+      },
+      loading: {
+        errrors: {
+          errorNetWork: 'Ошибка сети',
+          errorResource: 'Ресурс не содержит валидный RSS',
+        },
+        isLoaded: 'RSS успешно загружен',
+      },
+      updating: {
+        errors: {
+          errorNetWorkUpdating: 'Ошибка сети',
+          errorResourceUpdating: 'Ошибка сети',
+        },
+      },
+      content: {
+        feeds: 'Фиды',
+        topics: 'Посты',
+        view: 'Просмотр',
+      },
     },
   },
 };

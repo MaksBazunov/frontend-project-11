@@ -1,6 +1,4 @@
-const renderModal = (topic) => {
-    console.log(topic);
-    const viewedTopic = topic;
+const renderModal = (viewedTopic) => {
     const {
       description, link, title, childrenId,
     } = viewedTopic;
@@ -15,8 +13,18 @@ const renderModal = (topic) => {
     modaBody.textContent = description;
   
     const btnCheck = document.querySelector('[data-check]');
-    if (btnCheck.hasAttribute('[data-link^="ht"]')) btnCheck.removeAttribute('[data-link^="ht"]');
+  
+    if (btnCheck.hasAttribute('[data-link^="ht"]')) {
+      btnCheck.removeAttribute('[data-link^="ht"]');
+    }
+  
     btnCheck.setAttribute('data-link', link);
+  
+    btnCheck.addEventListener('click', (e) => {
+      e.preventDefault();
+      const currentlink = e.target.dataset.link;
+      window.open(currentlink);
+    });
   };
   
   export default renderModal;

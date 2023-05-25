@@ -1,42 +1,49 @@
 import buildColumn from './colSecondSection.js';
-import buildListGroupFeed from './renderListGroupFeed.js';
-import buildListGroupTopic from './renderListGroupTopics.js';
+import builFeedItem from './renderListGroupFeed.js';
+import builTopicItem from './renderListGroupTopics.js';
 
 const renderRssContent = (watcherLoadingRSSContent, i18n) => {
   try {
-    console.log('rendering');
     const parentContainer = document.querySelector('main');
-    const oldChildrensContainer = document.querySelector('[data-childrens]');
-    // eslint-disable-next-line no-unused-expressions
+
+    const oldChildrensContainer = document.querySelector('[data-section-response]');
     if (oldChildrensContainer) oldChildrensContainer.remove();
 
     const childrensContainer = document.createElement('section');
     childrensContainer.classList.add('container-fluid', 'container-xxl', 'p-5');
-    childrensContainer.setAttribute('data-childrens', '');
+    childrensContainer.setAttribute('data-section-response', '');
 
     const row = document.createElement('div');
+    row.setAttribute('data-content-container', '');
     row.classList.add('row');
 
     const feedColumn = buildColumn('feeds', i18n);
     const topicColumn = buildColumn('topics', i18n);
-    const listGroupTopic = document.createElement('ul');
-    listGroupTopic.classList.add('list-group', 'border-0', 'rounded-0');
+
+    const listGroupTopics = document.createElement('ul');
+    listGroupTopics.classList.add('list-group', 'border-0', 'rounded-0');
+    listGroupTopics.setAttribute('data-group-topics', '');
+
+    const listGroupFeeds = document.createElement('ul');
+    listGroupFeeds.classList.add('list-group', 'border-0', 'rounded-0');
+    listGroupFeeds.setAttribute('data-group-feeds', '');
 
     const { feeds } = watcherLoadingRSSContent;
     const { topics } = watcherLoadingRSSContent;
 
     feeds.forEach((feed) => {
-      const idFeed = feed.id;
-      const listGroupFeed = buildListGroupFeed(feed, idFeed);
+      const feedId = feed.id;
+      const feedItem = builFeedItem(feed, feedId);
 
-      const listsGroupTopics = topics.filter(({ id }) => id === idFeed)
-        .map((currentTopic) => buildListGroupTopic(currentTopic));
+      const topicItems = topics.filter(({ id }) => id === feedId)
+        .map((currentTopic) => builTopicItem(currentTopic, i18n));
 
-      feedColumn.append(listGroupFeed);
-      listsGroupTopics.forEach((currentTopicsList) => topicColumn.append(currentTopicsList));
+      listGroupFeeds.append(feedItem);
+      topicItems.forEach((currentTopicsList) => listGroupTopics.append(currentTopicsList));
     });
 
-    topicColumn.append(listGroupTopic);
+    topicColumn.append(listGroupTopics);
+    feedColumn.append(listGroupFeeds);
     row.append(topicColumn, feedColumn);
     childrensContainer.append(row);
     parentContainer.append(childrensContainer);

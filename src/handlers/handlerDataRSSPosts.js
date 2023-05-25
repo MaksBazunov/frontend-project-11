@@ -6,26 +6,30 @@ const handlerLoadingRSSContent = (watcherLoadingRSSContent, watcherActivityBtn, 
   const id = watcherLoadingRSSContent.resources.length;
 
   const proxy = 'https://allorigins.hexlet.app/get?';
+
   axios.get(`${proxy}disableCache=true&url=${encodeURIComponent(rssUrl)}/`)
     .catch(() => {
-      state.feedbackMessage = state.i18n.t('errorNetWork');
-      watcherLoadingRSSContent.errorLoading = true;
+      throw new Error(state.i18n.t('loading.errrors.errorNetWork'));
     })
     .then((response) => parserRSS(response, id))
     .catch(() => {
-      state.feedbackMessage = state.i18n.t('errorResource');
-      watcherLoadingRSSContent.errorLoading = true;
+      throw new Error(state.i18n.t('loading.errrors.errorResource'));
     })
     .then((parsedRss) => {
       const { feed, topics } = parsedRss;
+
+      watcherLoadingRSSContent.resources.push({ id, value: rssUrl });
       topics.forEach((topic) => watcherLoadingRSSContent.topics.push(topic));
       watcherLoadingRSSContent.feeds.push(feed);
-      state.feedbackMessage = state.i18n.t('isLoaded');
-      watcherLoadingRSSContent.resources.push({ id, value: rssUrl });
+
+      state.feedbackMessage = state.i18n.t('loading.isLoaded');
       watcherLoadingRSSContent.errorLoading = false;
+
       watcherActivityBtn.currentProcess = 'fillingRssUrl';
     })
-    .catch(() => {
+    .catch((error) => {
+      state.feedbackMessage = error.message;
+      watcherLoadingRSSContent.errorLoading = true;
       watcherActivityBtn.currentProcess = 'fillingRssUrl';
     });
 };

@@ -1,18 +1,18 @@
-const buildListGroupFeed = (feed, id) => {
-  const listGroupFeed = document.createElement('ul');
-  listGroupFeed.classList.add('list-group', 'border-0', 'rounded-0');
-  listGroupFeed.setAttribute('id', id);
+const builFeedItem = (feed, id) => {
+  const feedItem = document.createElement('li');
+  feedItem.classList.add('list-group-item', 'border-0', 'rounded-0');
+  feedItem.setAttribute('data-feed-id', id);
 
-  const titleFeed = document.createElement('h3');
-  titleFeed.classList.add('h6', 'm-0');
-  titleFeed.textContent = feed.title;
+  const feedtitle = document.createElement('h3');
+  feedtitle.classList.add('h6', 'm-0');
+  feedtitle.textContent = feed.title;
 
-  const descriptionFeed = document.createElement('p');
-  descriptionFeed.classList.add('m-0', 'small', 'text-black-50');
-  descriptionFeed.textContent = feed.description;
+  const feedDescription = document.createElement('p');
+  feedDescription.classList.add('m-0', 'small', 'text-black-50');
+  feedDescription.textContent = feed.description;
 
-  listGroupFeed.append(titleFeed, descriptionFeed);
-  return listGroupFeed;
+  feedItem.append(feedtitle, feedDescription);
+  return feedItem;
 };
 
-export default buildListGroupFeed;
+export default builFeedItem;

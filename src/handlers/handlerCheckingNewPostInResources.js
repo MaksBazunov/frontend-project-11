@@ -4,12 +4,13 @@ import parserRSS from '../parsers/parserRss.js';
 const handlerCheckingNewPostInResources = (watcherLoadingRSSContent, state) => {
   const { topics: oldTopics, resources } = watcherLoadingRSSContent;
   const proxy = 'https://allorigins.hexlet.app/get?';
+
   const promises = resources.map((resource) => axios.get(`${proxy}disableCache=true&url=${encodeURIComponent(resource.value)}/`)
     .then((response) => parserRSS(response, resource.id)));
 
   Promise.all(promises)
     .catch(() => {
-      state.feedbackMessage = state.i18n.t('errorNetWorkUpdating');
+      state.feedbackMessage = state.i18n.t('updating.errors.errorNetWorkUpdating');
       watcherLoadingRSSContent.updatingTopics.errorUpdating = true;
     })
     .then((parsedResources) => {

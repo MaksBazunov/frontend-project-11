@@ -7,15 +7,14 @@ const validateForm = (i18n, content) => {
       default: 'field_invalid',
     },
     string: {
-      url: i18n.t('isNotURL'),
-      required: i18n.t('isNotURL'),
+      url: i18n.t('validation.errors.errorURL'),
+      required: i18n.t('validation.errors.errorRequared'),
     },
   });
   const shema = yup.object().shape({
     rssUrl: yup.string()
       .required()
-      .url()
-      .trim(),
+      .url(),
   });
   return shema.validate({ rssUrl: content });
 };

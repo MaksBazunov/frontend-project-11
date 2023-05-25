@@ -1,9 +1,7 @@
 /* eslint-disable no-param-reassign */
-import _ from 'lodash';
 import validateForm from '../validators/validatorForm.js';
-import isUniqRSSUrlinResources from '../validators/validatorUniqUrlRSS.js';
+import isNewRSS from '../validators/validatorUniqUrlRSS.js';
 import handlerLoadingRSSContent from './handlerDataRSSPosts.js';
-import renderFeedback from '../renders/renderValid.js';
 
 // eslint-disable-next-line max-len
 const handlerButton = (state, watcherValidationRSSUrl, watcherLoadingRSSContent, watcherActivityBtn, input) => {
@@ -12,33 +10,30 @@ const handlerButton = (state, watcherValidationRSSUrl, watcherLoadingRSSContent,
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const content = input.value;
+
     validateForm(state.i18n, content)
-      .catch((err) => {
-        const [error] = err.errors;
-        state.feedbackMessage = error;
-        watcherValidationRSSUrl.isValid = false;
+      .catch(({ errors }) => { // Парсер ошибки
+        const [error] = errors;
+        throw new Error(error);
       })
       .then(({ rssUrl }) => {
-        if (!isUniqRSSUrlinResources(watcherLoadingRSSContent.resources, rssUrl)) throw new Error(state.i18n.t('isntUniqRSSUrl'));
-        state.feedbackMessage = state.i18n.t('isValid');
-        watcherValidationRSSUrl.isValid = true;
+        const { resources } = watcherLoadingRSSContent;
+        if (!isNewRSS(resources, rssUrl)) throw new Error(state.i18n.t('validation.errors.errorUniqRSSUrl'));
         return rssUrl;
       })
       .then((rssUrl) => {
+        state.feedbackMessage = state.i18n.t('validation.isValid');
+        watcherValidationRSSUrl.isValid = true;
         watcherActivityBtn.currentProcess = 'loadingRssContent';
         return rssUrl;
       })
       .then((rssUrl) => {
-        console.log('start');
         handlerLoadingRSSContent(watcherLoadingRSSContent, watcherActivityBtn, rssUrl, state);
       })
-      .then(() => {
-        console.log('end');
-        // watcherActivityBtn.currentProcess = 'fillingRssUrl';
-      })
-      .catch((err) => {
-        state.feedbackMessage = err.message;
+      .catch((error) => {
+        state.feedbackMessage = error.message;
         watcherValidationRSSUrl.isValid = false;
+        watcherActivityBtn.currentProcess = 'fillingRssUrl';
       });
   });
 };

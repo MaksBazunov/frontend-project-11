@@ -1,5 +1,4 @@
 const buttonActivityRender = (process) => {
-  console.log(process, 'process');
   const button = document.querySelector('.btn-form');
   switch (true) {
     case (process === 'loadingRssContent'):

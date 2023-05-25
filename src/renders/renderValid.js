@@ -1,11 +1,12 @@
 const renderFeedback = (status, message) => {
   try {
-    const columnForm = document.querySelector('[data-column-form="parent"]');
+    const columnForm = document.querySelector('div[data-head-content]');
     const oldP = document.querySelector('.feedback');
     if (oldP) oldP.remove();
 
     const input = document.querySelector('#url-input');
     input.value = '';
+
     if (input.classList.contains('is-invalid')) input.classList.remove('is-invalid');
 
     const p = document.createElement('p');

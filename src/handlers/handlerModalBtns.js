@@ -3,7 +3,6 @@ const handlerModalBtns = () => {
     Array.from(btns).forEach((btn) => {
       btn.addEventListener('show.bs.modal', (e) => {
         e.preventDefault();
-        console.log('feeeeeeeeeeeeeeef');
       });
     });
   };

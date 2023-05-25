@@ -1,21 +1,20 @@
 const handlerBtnsTopics = (watcherLoadingRssContent) => {
     Array.from(document.querySelectorAll('.btn-outline-primary')).forEach((btn) => {
-      console.log(btn);
       btn.addEventListener('mouseover', (e) => {
         e.preventDefault();
         const currentId = e.target.dataset.bsTarget;
-        console.log(currentId, 'currentId');
-        // eslint-disable-next-line max-len
-        const currentTopic = watcherLoadingRssContent.topics.filter(({ childrenId }) => childrenId === currentId);
-        console.log(currentTopic);
-        [watcherLoadingRssContent.uiState.currentModal] = currentTopic;
+  
+        const { topics } = watcherLoadingRssContent;
+        const currentTopic = topics.filter(({ childrenId }) => childrenId === currentId);
+        [watcherLoadingRssContent.uiState.currentModalTopic] = currentTopic;
       });
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        const modal = watcherLoadingRssContent.uiState.currentModal;
-        console.log(watcherLoadingRssContent.uiState.viewedTopics);
-        if (!watcherLoadingRssContent.uiState.viewedTopics.includes(modal.id)) {
-          watcherLoadingRssContent.uiState.viewedTopics.push(modal.childrenId);
+        const { currentModalTopic } = watcherLoadingRssContent.uiState;
+        const { viewedTopics } = watcherLoadingRssContent.uiState;
+  
+        if (!viewedTopics.includes(currentModalTopic.id)) {
+          viewedTopics.push(currentModalTopic.childrenId);
         }
       });
     });

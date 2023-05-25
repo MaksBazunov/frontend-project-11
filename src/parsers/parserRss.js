@@ -22,7 +22,7 @@ const parserRSS = (response, id) => {
 
     return { feed, topics };
   } catch {
-    throw new Error('somethingWrongInParsers');
+    throw new Error();
   }
 };
 

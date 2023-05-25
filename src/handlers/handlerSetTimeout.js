@@ -3,21 +3,20 @@
 import handlerCheckingNewPostInResources from './handlerCheckingNewPostInResources.js';
 
 const handlerSetTimeout = (watcherLoadingRSSContent, state, status) => {
-  const timerID = watcherLoadingRSSContent.updatingTopics.currentTimerID;
-  if (timerID) clearTimeout(timerID);
-  console.log('setted');
+  const { currentTimerID } = watcherLoadingRSSContent.updatingTopics;
+  if (currentTimerID) clearTimeout(currentTimerID);
+
   if (status) {
-    const idCorrectTimer = setTimeout(() => {
+    const correctTimerId = setTimeout(() => {
       handlerCheckingNewPostInResources(watcherLoadingRSSContent, state);
-      watcherLoadingRSSContent.updatingTopics.currentTimerID = idCorrectTimer;
+      watcherLoadingRSSContent.updatingTopics.currentTimerID = correctTimerId;
     }, 5000);
-    // eslint-disable-next-line max-len
     return;
   }
 
-  const idWrongTimer = setTimeout(() => {
+  const wrongTimerId = setTimeout(() => {
     handlerCheckingNewPostInResources(watcherLoadingRSSContent, state);
-    watcherLoadingRSSContent.updatingTopics.currentTimerID = idWrongTimer;
+    watcherLoadingRSSContent.updatingTopics.currentTimerID = wrongTimerId;
   }, 30000);
 };
 

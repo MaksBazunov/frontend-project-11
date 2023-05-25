@@ -8,11 +8,10 @@ import handlerBtnsTopics from '../handlers/handlerBtnOutline.js';
 import renderModal from '../renders/renderModal.js';
 import handlerLink from '../handlers/handlerLink.js';
 import renderTitle from '../renders/renderTitle.js';
-import handlerModalBtns from '../handlers/handlerModalBtns.js';
+import getCurrentTimerId from '../handlers/getCurrentTimerId.js';
 
 const watcherValidationRssURL = (state) => {
   const watcher = onChange(state.resultOfValidationRssUrl, (path, validationStatus) => {
-    console.log(state.feedbackMessage);
     if (validationStatus === null) return;
     renderFeedback(validationStatus, state.feedbackMessage);
     switchToDefaultValue(watcher, path);
@@ -27,10 +26,8 @@ const watcherActivityButton = (state) => {
 
 const watcherLoadingRssContent = (state) => {
   const watcher = onChange(state.resultOfLoadingRssContent, (path, value) => {
-    console.log(path, value, '11111111111111222222222222');
     switch (path) {
       case ('errorLoading'):
-        console.log(watcher);
         if (value === true) {
           renderFeedback(false, state.feedbackMessage);
           switchToDefaultValue(watcher, path);
@@ -39,10 +36,8 @@ const watcherLoadingRssContent = (state) => {
           renderRssContent(watcher, state.i18n);
           renderFeedback(true, state.feedbackMessage);
           handlerBtnsTopics(watcher);
-          // handlerModalBtns();
           switchToDefaultValue(watcher, path);
-          // eslint-disable-next-line max-len
-          if (watcher.updatingTopics.currentTimerID === null) handlerSetTimeout(watcher, state, true);
+          if (!getCurrentTimerId(watcher)) handlerSetTimeout(watcher, state, true);
         }
         break;
       case ('updatingTopics.errorUpdating'):
@@ -55,9 +50,8 @@ const watcherLoadingRssContent = (state) => {
       case ('updatingTopics.currentTimerID'):
         handlerSetTimeout(watcher, state, true);
         break;
-      case ('uiState.currentModal'):
+      case ('uiState.currentModalTopic'):
         renderModal(value);
-        handlerLink();
         break;
       case ('uiState.viewedTopics'):
         renderTitle(watcher.uiState.viewedTopics);

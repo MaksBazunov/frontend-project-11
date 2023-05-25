@@ -20,18 +20,18 @@ const runApp = () => {
         currentProcess: null, // fillingRssUrl, loadingRssContent
       },
       resultOfLoadingRssContent: {
+        errorLoading: null,
+        resources: [],
+        feeds: [],
+        topics: [],
         updatingTopics: {
           currentTimerID: null,
           errorUpdating: null,
         },
         uiState: {
           viewedTopics: [],
-          currentModal: null,
+          currentModalTopic: null,
         },
-        errorLoading: null,
-        resources: [],
-        feeds: [],
-        topics: [],
       },
       resultOfValidationRssUrl: {
         isValid: null,

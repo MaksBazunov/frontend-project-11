@@ -9,12 +9,15 @@ const handlerLoadingRSSContent = (watcherLoadingRSSContent, rssUrl) => {
   axios.get(`${proxy}disableCache=true&url=${encodeURIComponent(rssUrl)}/`)
     .then((response) => parserRSS(response, id))
     .then((parsedRss) => {
-      const { feed, topic } = parsedRss;
-      watcherLoadingRSSContent.topics.push(topic);
+      const { feed, topics } = parsedRss;
+      console.log(topics);
+      topics.forEach((topic) => watcherLoadingRSSContent.topics.push(topic));
       watcherLoadingRSSContent.feeds.push(feed);
+      watcherLoadingRSSContent.addingCounter += 1;
     })
     .catch((e) => {
-      console.log(e);
+      console.log(e)
+      watcherLoadingRSSContent.addingCounter = 0;
       throw new Error(e);
     });
 };

@@ -10,6 +10,7 @@ const handlerCheckingNewPostInResources = (watcherLoadingRSSContent) => {
     return axios.get(`${proxy}disableCache=true&url=${encodeURIComponent(resource.value)}/`)
     .then((response) => parserRSS(response, resource.id))
   });
+
   Promise.all(promises)
   .then((parsedResources) => {
     parsedResources.forEach((parsedRss) => {
@@ -28,6 +29,13 @@ const handlerCheckingNewPostInResources = (watcherLoadingRSSContent) => {
     watcherLoadingRSSContent.addingCounter = 0;
     handlerSetTimeout(watcherLoadingRSSContent, false);
   });
-  });
+});
 }
 export default handlerCheckingNewPostInResources;
+/*
+        watcherLoadingRSSContent.addingCounter += 1;
+        handlerSetTimeout(watcherLoadingRSSContent, true);
+
+        watcherLoadingRSSContent.addingCounter = 0;
+        handlerSetTimeout(watcherLoadingRSSContent, false);
+*/

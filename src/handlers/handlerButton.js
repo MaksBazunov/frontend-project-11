@@ -13,6 +13,7 @@ const handlerButton = (state, watcherValidationRSSUrl, watcherLoadingRSSContent,
 
     validateForm(state.i18n, content)
       .catch(({ errors }) => { // Парсер ошибки
+        console.log(JSON.stringify(errors, null, 5));
         const [error] = errors;
         throw new Error(error);
       })

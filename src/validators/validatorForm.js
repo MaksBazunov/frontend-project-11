@@ -5,10 +5,10 @@ const validateForm = (i18n, content) => {
   setLocale({
     mixed: {
       default: 'field_invalid',
+      required: i18n.t('validation.errors.errorRequared'),
     },
     string: {
       url: i18n.t('validation.errors.errorURL'),
-      required: i18n.t('validation.errors.errorRequared'),
     },
   });
   const shema = yup.object().shape({

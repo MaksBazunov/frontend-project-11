@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import validateForm from '../validators/formValidator.js';
+import validateForm from '../validators/validatorForm.js';
 import isNewRSSResource from '../validators/newRSSResource.js';
 import handlerOfLoadingRSSContent from './dataRSSPostsHandler.js';
 
@@ -12,8 +12,10 @@ const handlerOfBtnFormSection = (state, watcherValidationRSSUrl, watcherLoadingR
     const content = input.value;
 
     validateForm(state.i18n, content)
-      .catch(({ errors }) => { // Парсер ошибки
+      .catch(({ errors }) => { 
+        console.log(JSON.stringify(errors, null, 5));
         const [error] = errors;
+        console.log(error);
         throw new Error(error);
       })
       .then((rssUrl) => {
@@ -22,17 +24,16 @@ const handlerOfBtnFormSection = (state, watcherValidationRSSUrl, watcherLoadingR
         return rssUrl;
       })
       .then((rssUrl) => {
-        watcherActivityBtn.currentProcess = 'loadingRssContent';
         state.feedbackMessage = state.i18n.t('validation.isValid');
         watcherValidationRSSUrl.isValid = true;
         watcherActivityBtn.currentProcess = 'loadingRssContent';
         return rssUrl;
       })
       .then((rssUrl) => {
-        // eslint-disable-next-line max-len
         handlerOfLoadingRSSContent(watcherLoadingRSSContent, watcherActivityBtn, rssUrl, state);
       })
       .catch((error) => {
+        console.log(error, 'end');
         state.feedbackMessage = error.message;
         watcherValidationRSSUrl.isValid = false;
         watcherActivityBtn.currentProcess = 'fillingRssUrl';

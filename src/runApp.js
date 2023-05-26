@@ -1,3 +1,5 @@
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import i18next from 'i18next';
 import languages from './resources/languages.js';
 import app from './app.js';
@@ -17,7 +19,7 @@ const runApp = () => {
       i18n: i18nInst,
       feedbackMessage: null,
       process: {
-        currentProcess: null, // fillingRssUrl, loadingRssContent
+        currentProcess: null, 
       },
       resultOfLoadingRssContent: {
         errorLoading: null,
@@ -48,4 +50,4 @@ const runApp = () => {
     });
 };
 
-export default runApp;
+export default runApp();

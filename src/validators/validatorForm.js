@@ -5,18 +5,16 @@ const validateForm = (i18n, content) => {
   setLocale({
     mixed: {
       default: 'field_invalid',
-      required: i18n.t('validation.errors.errorRequared'),
     },
     string: {
       url: i18n.t('validation.errors.errorURL'),
+      min: i18n.t('validation.errors.errorRequared'),
     },
   });
-  const shema = yup.object().shape({
-    rssUrl: yup.string()
-      .required()
-      .url(),
-  });
-  return shema.validate({ rssUrl: content });
+
+  const shema = yup.string().url().min(1);
+
+  return shema.validate(content);
 };
 
 export default validateForm;

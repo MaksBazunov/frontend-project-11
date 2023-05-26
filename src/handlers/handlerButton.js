@@ -15,9 +15,10 @@ const handlerButton = (state, watcherValidationRSSUrl, watcherLoadingRSSContent,
       .catch(({ errors }) => { // Парсер ошибки
         console.log(JSON.stringify(errors, null, 5));
         const [error] = errors;
+        console.log(error);
         throw new Error(error);
       })
-      .then(({ rssUrl }) => {
+      .then((rssUrl ) => {
         const { resources } = watcherLoadingRSSContent;
         if (!isNewRSS(resources, rssUrl)) throw new Error(state.i18n.t('validation.errors.errorUniqRSSUrl'));
         return rssUrl;
@@ -32,6 +33,7 @@ const handlerButton = (state, watcherValidationRSSUrl, watcherLoadingRSSContent,
         handlerLoadingRSSContent(watcherLoadingRSSContent, watcherActivityBtn, rssUrl, state);
       })
       .catch((error) => {
+        console.log(error, 'end');
         state.feedbackMessage = error.message;
         watcherValidationRSSUrl.isValid = false;
         watcherActivityBtn.currentProcess = 'fillingRssUrl';

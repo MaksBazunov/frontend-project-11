@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import axios from 'axios';
 import parserRSS from '../parsers/parserRss.js';
 
@@ -28,8 +27,10 @@ const checkNewPostInResources = (watcherLoadingRSSContent, state) => {
         // eslint-disable-next-line max-len
         const oldTopicsWithCurrentId = oldTopics.filter(({ id }) => currentId === id).map(({ title }) => title);
         const newTopics = topics.filter(({ title }) => !oldTopicsWithCurrentId.includes(title));
+        console.log(newTopics);
         if (newTopics.length === 0) return;
         newTopics.forEach((newTopic) => watcherLoadingRSSContent.topics.push(newTopic));
+        console.log(watcherLoadingRSSContent.topics);
       });
     })
     .then(() => {
@@ -47,6 +48,7 @@ const setTimer = (watcherLoadingRSSContent, state, status) => {
   if (currentTimerId) clearTimeout(currentTimerId);
 
   if (status) {
+    console.log('setted');
     const correctTimerId = setTimeout(() => {
       checkNewPostInResources(watcherLoadingRSSContent, state);
       watcherLoadingRSSContent.updatingTopics.currentTimerID = correctTimerId;

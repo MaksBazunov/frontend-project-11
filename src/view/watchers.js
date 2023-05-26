@@ -1,26 +1,24 @@
 import onChange from 'on-change';
-import renderFeedback from '../renders/renderValid.js';
-import buttonActivityRender from '../renders/buttonActivityRender.js';
-import renderRssContent from '../renders/renderRssPosts.js';
-import handlerSetTimeout from '../handlers/handlerSetTimeout.js';
-import switchToDefaultValue from '../handlers/switchToDefaultValue.js';
-import handlerBtnsTopics from '../handlers/handlerBtnOutline.js';
-import renderModal from '../renders/renderModal.js';
-import handlerLink from '../handlers/handlerLink.js';
-import renderTitle from '../renders/renderTitle.js';
-import getCurrentTimerId from '../handlers/getCurrentTimerId.js';
+
+import { renderFeedbackOfFormSetion, renderBtnOfFormSection } from '../renders/formSectionRender.js';
+import { renderRssContent, renderTitleOfViewedTopics } from '../renders/responseSectionRender.js';
+import renderOfCurrentModalTopic from '../renders/modalRender.js';
+
+import { setTimer, getCurrentTimerId } from '../handlers/updateHandlers.js';
+import { handlerOfmodalWindowOpeningBtns } from '../handlers/modalHandlers.js';
+import { switchToDefaultValue } from '../handlers/additionalHandlers.js';
 
 const watcherValidationRssURL = (state) => {
   const watcher = onChange(state.resultOfValidationRssUrl, (path, validationStatus) => {
     if (validationStatus === null) return;
-    renderFeedback(validationStatus, state.feedbackMessage);
+    renderFeedbackOfFormSetion(validationStatus, state.feedbackMessage);
     switchToDefaultValue(watcher, path);
   });
   return watcher;
 };
 
 const watcherActivityButton = (state) => {
-  const watcher = onChange(state.process, (path, process) => buttonActivityRender(process));
+  const watcher = onChange(state.process, (path, process) => renderBtnOfFormSection(process));
   return watcher;
 };
 
@@ -29,39 +27,39 @@ const watcherLoadingRssContent = (state) => {
     switch (path) {
       case ('errorLoading'):
         if (value === true) {
-          renderFeedback(false, state.feedbackMessage);
+          renderFeedbackOfFormSetion(false, state.feedbackMessage);
           switchToDefaultValue(watcher, path);
         }
         if (value === false) {
           renderRssContent(watcher, state.i18n);
-          renderFeedback(true, state.feedbackMessage);
-          handlerBtnsTopics(watcher);
+          renderFeedbackOfFormSetion(true, state.feedbackMessage);
+          handlerOfmodalWindowOpeningBtns(watcher);
           switchToDefaultValue(watcher, path);
-          if (!getCurrentTimerId(watcher)) handlerSetTimeout(watcher, state, true);
+          if (!getCurrentTimerId(watcher)) setTimer(watcher, state, true);
         }
         break;
       case ('updatingTopics.errorUpdating'):
         console.log(watcher);
         if (value === true) {
-          renderFeedback(false, state.feedbackMessage);
-          handlerSetTimeout(watcher, state, false);
+          renderFeedbackOfFormSetion(false, state.feedbackMessage);
+          setTimer(watcher, state, false);
           switchToDefaultValue(watcher, path);
         }
         if (value === false) {
           // renderFeedback(true, state.feedbackMessage);
           renderRssContent(watcher, state.i18n);
-          handlerBtnsTopics(watcher);
+          handlerOfmodalWindowOpeningBtns(watcher);
           switchToDefaultValue(watcher.updatingTopics, 'errorUpdating');
         }
         break;
       case ('updatingTopics.currentTimerID'):
-        handlerSetTimeout(watcher, state, true);
+        setTimer(watcher, state, true);
         break;
       case ('uiState.currentModalTopic'):
-        renderModal(value);
+        renderOfCurrentModalTopic(value);
         break;
       case ('uiState.viewedTopics'):
-        renderTitle(watcher.uiState.viewedTopics);
+        renderTitleOfViewedTopics(watcher.uiState.viewedTopics);
         break;
       default:
         break;

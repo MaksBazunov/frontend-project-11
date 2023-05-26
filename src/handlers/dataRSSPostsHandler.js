@@ -3,34 +3,33 @@ import axios from 'axios';
 import parserRSS from '../parsers/parserRss.js';
 import { getUniqId } from './additionalHandlers.js';
 
-// eslint-disable-next-line max-len
 const handlerOfLoadingRSSContent = (watcherLoadingRSSContent, watcherActivityBtn, rssUrl, state) => {
   const id = getUniqId();
-  const newUrl = new URL(`https://allorigins.hexlet.app/get?url=${rssUrl}`);
-  newUrl.searchParams.set('disableCache', true);
 
-  axios.get(newUrl.toString())
+  const proxy = 'https://allorigins.hexlet.app/get?';
+
+  axios.get(`${proxy}disableCache=true&url=${encodeURIComponent(rssUrl)}/`)
     .catch(() => {
-      state.feedbackMessage = state.i18n.t('loading.errrors.errorNetWork');
-      throw new Error();
+      throw new Error(state.i18n.t('loading.errrors.errorNetWork'));
     })
     .then((response) => parserRSS(response, id))
-    .catch((error) => {
-      const errorMessage = error.message;
-      if (errorMessage === 'errorParsing') state.feedbackMessage = state.i18n.t('loading.errrors.errorResource');
-      throw new Error();
+    .catch(() => {
+      throw new Error(state.i18n.t('loading.errrors.errorResource'));
     })
     .then((parsedRss) => {
       const { feed, topics } = parsedRss;
+
       watcherLoadingRSSContent.resources.push({ id, value: rssUrl });
       topics.forEach((topic) => watcherLoadingRSSContent.topics.push(topic));
       watcherLoadingRSSContent.feeds.push(feed);
 
       state.feedbackMessage = state.i18n.t('loading.isLoaded');
       watcherLoadingRSSContent.errorLoading = false;
+
       watcherActivityBtn.currentProcess = 'fillingRssUrl';
     })
-    .catch(() => {
+    .catch((error) => {
+      state.feedbackMessage = error.message;
       watcherLoadingRSSContent.errorLoading = true;
       watcherActivityBtn.currentProcess = 'fillingRssUrl';
     });

@@ -21,6 +21,7 @@ const renderFeedbackOfFormSetion = (status, message) => {
 
     p.classList.add('text-danger');
     input.classList.add('is-invalid');
+    input.focus();
   } catch (e) {
     console.log(e, 'something wrong in view');
   }

@@ -2,6 +2,7 @@ import * as yup from 'yup';
 import { setLocale } from 'yup';
 
 const validateForm = (i18n, content) => {
+  console.log(content, 'content');
   setLocale({
     mixed: {
       default: 'field_invalid',

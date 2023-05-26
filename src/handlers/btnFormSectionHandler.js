@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import validateForm from '../validators/validatorForm.js';
+import validateForm from '../validators/formValidator.js';
 import isNewRSSResource from '../validators/newRSSResource.js';
 import handlerOfLoadingRSSContent from './dataRSSPostsHandler.js';
 
@@ -12,10 +12,8 @@ const handlerOfBtnFormSection = (state, watcherValidationRSSUrl, watcherLoadingR
     const content = input.value;
 
     validateForm(state.i18n, content)
-      .catch(({ errors }) => { 
-        console.log(JSON.stringify(errors, null, 5));
+      .catch(({ errors }) => { // Парсер ошибки
         const [error] = errors;
-        console.log(error);
         throw new Error(error);
       })
       .then((rssUrl) => {
@@ -23,13 +21,15 @@ const handlerOfBtnFormSection = (state, watcherValidationRSSUrl, watcherLoadingR
         if (!isNewRSSResource(resources, rssUrl)) throw new Error(state.i18n.t('validation.errors.errorUniqRSSUrl'));
         return rssUrl;
       })
-      .then((rssUrl) => {
+      .then(() => {
         state.feedbackMessage = state.i18n.t('validation.isValid');
         watcherValidationRSSUrl.isValid = true;
-        watcherActivityBtn.currentProcess = 'loadingRssContent';
-        return rssUrl;
+        // watcherActivityBtn.currentProcess = 'loadingRssContent';
+        // return rssUrl;
       })
       .then((rssUrl) => {
+        watcherActivityBtn.currentProcess = 'loadingRssContent';
+        // eslint-disable-next-line max-len
         handlerOfLoadingRSSContent(watcherLoadingRSSContent, watcherActivityBtn, rssUrl, state);
       })
       .catch((error) => {

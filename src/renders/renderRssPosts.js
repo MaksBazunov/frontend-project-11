@@ -30,13 +30,13 @@ const renderRssContent = (watcherLoadingRSSContent, i18n) => {
 
     const { feeds } = watcherLoadingRSSContent;
     const { topics } = watcherLoadingRSSContent;
-
+    const { viewedTopics } = watcherLoadingRSSContent.uiState;
     feeds.forEach((feed) => {
       const feedId = feed.id;
       const feedItem = builFeedItem(feed, feedId);
 
       const topicItems = topics.filter(({ id }) => id === feedId)
-        .map((currentTopic) => builTopicItem(currentTopic, i18n));
+        .map((currentTopic) => builTopicItem(viewedTopics, currentTopic, i18n));
 
       listGroupFeeds.append(feedItem);
       topicItems.forEach((currentTopicsList) => listGroupTopics.append(currentTopicsList));

@@ -41,10 +41,17 @@ const watcherLoadingRssContent = (state) => {
         }
         break;
       case ('updatingTopics.errorUpdating'):
+        console.log(watcher);
         if (value === true) {
           renderFeedback(false, state.feedbackMessage);
           handlerSetTimeout(watcher, state, false);
           switchToDefaultValue(watcher, path);
+        }
+        if (value === false) {
+          // renderFeedback(true, state.feedbackMessage);
+          renderRssContent(watcher, state.i18n);
+          handlerBtnsTopics(watcher);
+          switchToDefaultValue(watcher.updatingTopics, 'errorUpdating');
         }
         break;
       case ('updatingTopics.currentTimerID'):

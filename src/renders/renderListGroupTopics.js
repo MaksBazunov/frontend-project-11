@@ -1,11 +1,13 @@
-const builTopicItem = (topic, i18n) => {
+const builTopicItem = (viewedTopics, topic, i18n) => {
   const topicItem = document.createElement('li');
   topicItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0');
   topicItem.setAttribute('data-topic-id', topic.id);
   topicItem.setAttribute('data-topic-childrenId', topic.childrenId);
 
   const topicTitle = document.createElement('a');
-  topicTitle.classList.add('fw-bold');
+  if (viewedTopics.includes(topic.childrenId)) topicTitle.classList.add('fw-normal', 'link-secondary');
+  if (!viewedTopics.includes(topic.childrenId)) topicTitle.classList.add('fw-bold');
+  // topicTitle.classList.add('fw-bold');
   topicTitle.setAttribute('href', topic.link);
   topicTitle.textContent = topic.title;
 

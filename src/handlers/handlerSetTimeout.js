@@ -7,6 +7,7 @@ const handlerSetTimeout = (watcherLoadingRSSContent, state, status) => {
   if (currentTimerID) clearTimeout(currentTimerID);
 
   if (status) {
+    console.log('setted');
     const correctTimerId = setTimeout(() => {
       handlerCheckingNewPostInResources(watcherLoadingRSSContent, state);
       watcherLoadingRSSContent.updatingTopics.currentTimerID = correctTimerId;

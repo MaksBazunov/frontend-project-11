@@ -1,3 +1,5 @@
+import uuid from "../handlers/getUniqId.js";
+
 const parserRSS = (response, id) => {
   try {
     const parser = new DOMParser();
@@ -7,16 +9,16 @@ const parserRSS = (response, id) => {
       description: data.querySelector('channel description').textContent,
       id,
     };
-    let childrenId = id;
+    // let childrenId = id;
     const topics = Array.from(data.querySelectorAll('item')).map((item) => {
       const top = {
         title: item.querySelector('title').textContent,
         link: item.querySelector('link').textContent,
         description: item.querySelector('description').textContent,
         id,
-        childrenId: `#i${childrenId}`,
+        childrenId: `#i${uuid()}`,
       };
-      childrenId += 1;
+      // childrenId += 1;
       return top;
     });
 

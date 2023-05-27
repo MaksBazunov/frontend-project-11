@@ -6,7 +6,7 @@ const checkNewPostInResources = (watcherLoadingRSSContent, state) => {
   const { topics: oldTopics, resources } = watcherLoadingRSSContent;
   const proxy = 'https://allorigins.hexlet.app/get?';
 
-  const promises = resources.map((resource) => {
+  const promises = resources.map((resource) => (
     axios.get(`${proxy}disableCache=true&url=${encodeURIComponent(resource.value)}/`)
       .catch(() => {
         state.feedbackMessage = state.i18n.t('updating.errors.errorNetWorkUpdating');
@@ -16,8 +16,8 @@ const checkNewPostInResources = (watcherLoadingRSSContent, state) => {
       .catch(() => {
         state.feedbackMessage = state.i18n.t('updating.errors.errorResourceUpdating');
         throw new Error();
-      });
-  });
+      })
+  ));
 
   Promise.all(promises)
     .then((parsedResources) => {

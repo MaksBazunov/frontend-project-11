@@ -23,7 +23,7 @@ const checkNewPostInResources = (watcherLoadingRSSContent, state) => {
     .then((parsedResources) => {
       parsedResources.forEach((parsedRss) => {
         const { topics, feed } = parsedRss;
-        const { id: currentId } = feed;  
+        const { id: currentId } = feed;
         const oldTopicsWithCurrentIdFilter = oldTopics.filter(({ id }) => currentId === id);
         const oldTopicsWithCurrentId = oldTopicsWithCurrentIdFilter.map(({ title }) => title);
         const newTopics = topics.filter(({ title }) => !oldTopicsWithCurrentId.includes(title));

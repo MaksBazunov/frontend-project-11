@@ -6,7 +6,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 //const __filename = fileURLToPath(import.meta.url);
- //const __dirname = dirname(__filename);
+// const __dirname = dirname(__filename);
 
 export default {
   mode: 'development',
@@ -28,6 +28,7 @@ export default {
     new HtmlWebpackPlugin({
       template: './index.html',
     }),
+    
     new CleanWebpackPlugin(),
   ],
 };

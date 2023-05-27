@@ -1,11 +1,10 @@
-
 import * as path from 'path';
-//import { fileURLToPath } from 'url';
-//import { dirname } from 'path';
+// import { fileURLToPath } from 'url';
+// import { dirname } from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
-//const __filename = fileURLToPath(import.meta.url);
+// const __filename = fileURLToPath(import.meta.url);
 // const __dirname = dirname(__filename);
 
 export default {
@@ -25,14 +24,13 @@ export default {
     path: path.resolve('dist'),
   },
     devServer: {
-    open: true,
-    host: "localhost",
+      open: true,
+      host: 'localhost',
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './index.html',
     }),
-    
     new CleanWebpackPlugin(),
   ],
 };

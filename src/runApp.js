@@ -19,7 +19,7 @@ const runApp = () => {
       i18n: i18nInst,
       feedbackMessage: null,
       process: {
-        currentProcess: null, 
+        currentProcess: null,
       },
       resultOfRssContentLoading: {
         errorLoading: null,

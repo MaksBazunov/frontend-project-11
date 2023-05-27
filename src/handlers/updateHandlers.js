@@ -23,9 +23,9 @@ const checkNewPostInResources = (watcherLoadingRSSContent, state) => {
     .then((parsedResources) => {
       parsedResources.forEach((parsedRss) => {
         const { topics, feed } = parsedRss;
-        const { id: currentId } = feed;
-       
-        const oldTopicsWithCurrentId = oldTopics.filter(({ id }) => currentId === id).map(({ title }) => title);
+        const { id: currentId } = feed;  
+        const oldTopicsWithCurrentIdFilter = oldTopics.filter(({ id }) => currentId === id);
+        const oldTopicsWithCurrentId = oldTopicsWithCurrentIdFilter.map(({ title }) => title);
         const newTopics = topics.filter(({ title }) => !oldTopicsWithCurrentId.includes(title));
         if (newTopics.length === 0) return;
         newTopics.forEach((newTopic) => watcherLoadingRSSContent.topics.push(newTopic));

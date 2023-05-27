@@ -23,7 +23,7 @@ const watcherActivityButton = (state) => {
 };
 
 const watcherLoadingRssContent = (state) => {
-  const watcher = onChange(state.resultOfLoadingRssContent, (path, value) => {
+  const watcher = onChange(state.resultOfRssContentLoading, (path, value) => {
     switch (path) {
       case ('errorLoading'):
         if (value === true) {
@@ -39,14 +39,11 @@ const watcherLoadingRssContent = (state) => {
         }
         break;
       case ('updatingTopics.errorUpdating'):
-        console.log(watcher);
         if (value === true) {
-          // renderFeedbackOfFormSetion(false, state.feedbackMessage);
           setTimer(watcher, state, false);
-          switchToDefaultValue(watcher, path);
+          switchToDefaultValue(watcher.updatingTopics, 'errorUpdating');
         }
         if (value === false) {
-          renderFeedbackOfFormSetion(true, state.feedbackMessage);
           renderRssContent(watcher, state.i18n);
           handlerOfmodalWindowOpeningBtns(watcher);
           switchToDefaultValue(watcher.updatingTopics, 'errorUpdating');

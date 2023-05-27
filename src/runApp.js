@@ -21,7 +21,7 @@ const runApp = () => {
       process: {
         currentProcess: null, 
       },
-      resultOfLoadingRssContent: {
+      resultOfRssContentLoading: {
         errorLoading: null,
         resources: [],
         feeds: [],

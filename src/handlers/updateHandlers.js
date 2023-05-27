@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import axios from 'axios';
 import parserRSS from '../parsers/parserRss.js';
 
@@ -5,7 +6,6 @@ const checkNewPostInResources = (watcherLoadingRSSContent, state) => {
   const { topics: oldTopics, resources } = watcherLoadingRSSContent;
   const proxy = 'https://allorigins.hexlet.app/get?';
 
-  // eslint-disable-next-line arrow-body-style
   const promises = resources.map((resource) => {
     return axios.get(`${proxy}disableCache=true&url=${encodeURIComponent(resource.value)}/`)
       .catch(() => {
@@ -24,7 +24,7 @@ const checkNewPostInResources = (watcherLoadingRSSContent, state) => {
       parsedResources.forEach((parsedRss) => {
         const { topics, feed } = parsedRss;
         const { id: currentId } = feed;
-        // eslint-disable-next-line max-len
+       
         const oldTopicsWithCurrentId = oldTopics.filter(({ id }) => currentId === id).map(({ title }) => title);
         const newTopics = topics.filter(({ title }) => !oldTopicsWithCurrentId.includes(title));
         if (newTopics.length === 0) return;

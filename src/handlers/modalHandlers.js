@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const handlerOfLinkOpeningBtn = () => {
   const btn = document.querySelector('[data-check]');
   btn.addEventListener('click', (e) => {

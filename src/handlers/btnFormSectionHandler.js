@@ -12,7 +12,7 @@ const handlerOfBtnFormSection = (state, watcherValidationRSSUrl, watcherLoadingR
     const content = input.value;
 
     validateForm(state.i18n, content)
-      .catch(({ errors }) => { // Парсер ошибки
+      .catch(({ errors }) => { 
         const [error] = errors;
         throw new Error(error);
       })
@@ -23,9 +23,9 @@ const handlerOfBtnFormSection = (state, watcherValidationRSSUrl, watcherLoadingR
       })
       .then((rssUrl) => {
         watcherActivityBtn.currentProcess = 'loadingRssContent';
-        //state.feedbackMessage = state.i18n.t('validation.isValid');
-        //watcherValidationRSSUrl.isValid = true;
-        // watcherActivityBtn.currentProcess = 'loadingRssContent';
+        state.feedbackMessage = state.i18n.t('validation.isValid');
+        watcherValidationRSSUrl.isValid = true;
+         watcherActivityBtn.currentProcess = 'loadingRssContent';
         return rssUrl;
       })
       .then((rssUrl) => {

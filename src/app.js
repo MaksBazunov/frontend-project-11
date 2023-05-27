@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* eslint-disable max-len */
 import handlerOfBtnFormSection from './handlers/btnFormSectionHandler.js';
 import { handlerOfLinkOpeningBtn } from './handlers/modalHandlers.js';
 import {
@@ -13,7 +13,6 @@ const app = (state) => {
   const watcherLoadingRSSContent = watcherLoadingRssContent(state);
   const watcherActivityBtn = watcherActivityButton(state);
 
-  // eslint-disable-next-line max-len
   handlerOfLinkOpeningBtn();
   handlerOfBtnFormSection(state, watcherValidationRSSUrl, watcherLoadingRSSContent, watcherActivityBtn, input);
 };

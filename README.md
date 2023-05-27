@@ -9,4 +9,4 @@ https://frontend-project-11-chi-rust.vercel.app/
 
 ### Description:
 This is a simple RSS-reader application made during learning on Hexlet Frontend-developer course.
-
+Simply copy and paste in the textbox a link with RSS. Then click 'Add' or Enter - and see the feeds and posts you added.

@@ -21,14 +21,14 @@ const handlerOfBtnFormSection = (state, watcherValidationRSSUrl, watcherLoadingR
         if (!isNewRSSResource(resources, rssUrl)) throw new Error(state.i18n.t('validation.errors.errorUniqRSSUrl'));
         return rssUrl;
       })
-      .then(() => {
-        state.feedbackMessage = state.i18n.t('validation.isValid');
-        watcherValidationRSSUrl.isValid = true;
-        // watcherActivityBtn.currentProcess = 'loadingRssContent';
-        // return rssUrl;
-      })
       .then((rssUrl) => {
         watcherActivityBtn.currentProcess = 'loadingRssContent';
+        //state.feedbackMessage = state.i18n.t('validation.isValid');
+        //watcherValidationRSSUrl.isValid = true;
+        // watcherActivityBtn.currentProcess = 'loadingRssContent';
+        return rssUrl;
+      })
+      .then((rssUrl) => {
         // eslint-disable-next-line max-len
         handlerOfLoadingRSSContent(watcherLoadingRSSContent, watcherActivityBtn, rssUrl, state);
       })

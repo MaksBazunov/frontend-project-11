@@ -29,12 +29,15 @@ const renderFeedbackOfFormSetion = (status, message) => {
 
 const renderBtnOfFormSection = (process) => {
   const button = document.querySelector('.btn-form');
+  const input = document.querySelector('#url-input');
   switch (true) {
     case (process === 'loadingRssContent'):
       button.setAttribute('disabled', '');
+      input.setAttribute('readonly', '');
       break;
     case (process === 'fillingRssUrl'):
       button.removeAttribute('disabled');
+      input.removeAttribute('readonly');
       break;
     default:
       throw new Error(`${process} something wrong in activity Btn`);

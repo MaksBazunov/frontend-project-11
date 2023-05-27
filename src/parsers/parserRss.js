@@ -9,7 +9,7 @@ const parserRSS = (response, id) => {
       description: data.querySelector('channel description').textContent,
       id,
     };
-    // let childrenId = id;
+
     const topics = Array.from(data.querySelectorAll('item')).map((item) => {
       const top = {
         title: item.querySelector('title').textContent,
@@ -18,13 +18,12 @@ const parserRSS = (response, id) => {
         id,
         childrenId: `#i${getUniqId()}`,
       };
-      // childrenId += 1;
       return top;
     });
 
     return { feed, topics };
   } catch {
-    throw new Error();
+    throw new Error('errorParsing');
   }
 };
 

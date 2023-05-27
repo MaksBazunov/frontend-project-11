@@ -42,7 +42,6 @@ const runApp = () => {
     return state;
   })
     .then((state) => {
-      console.log(state);
       app(state);
     })
     .catch((e) => {

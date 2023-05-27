@@ -7,7 +7,7 @@ const checkNewPostInResources = (watcherLoadingRSSContent, state) => {
   const proxy = 'https://allorigins.hexlet.app/get?';
 
   const promises = resources.map((resource) => {
-    return axios.get(`${proxy}disableCache=true&url=${encodeURIComponent(resource.value)}/`)
+    axios.get(`${proxy}disableCache=true&url=${encodeURIComponent(resource.value)}/`)
       .catch(() => {
         state.feedbackMessage = state.i18n.t('updating.errors.errorNetWorkUpdating');
         throw new Error();

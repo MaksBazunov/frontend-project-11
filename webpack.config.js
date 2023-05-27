@@ -24,6 +24,10 @@ export default {
     filename: '[name].[contenthash].js',
     path: path.resolve('dist'),
   },
+    devServer: {
+    open: true,
+    host: "localhost",
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './index.html',

@@ -16,8 +16,7 @@ const handlerOfLoadingRSSContent = (watcherLoadingRSSContent, watcherActivityBtn
     })
     .then((response) => parserRSS(response, id))
     .catch((error) => {
-      const errorMessage = error.message;
-      if (errorMessage === 'errorParsing') state.feedbackMessage = state.i18n.t('loading.errrors.errorResource');
+      if (error.message === 'errorParsing') state.feedbackMessage = state.i18n.t('loading.errrors.errorResource');
       throw new Error();
     })
     .then((parsedRss) => {

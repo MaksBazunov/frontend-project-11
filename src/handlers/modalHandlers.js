@@ -7,7 +7,6 @@ const handlerOfLinkOpeningBtn = () => {
     window.open(currentlink);
   });
 };
-
 const handlerOfmodalWindowOpeningBtns = (watcherLoadingRssContent) => {
   Array.from(document.querySelectorAll('.btn-outline-primary')).forEach((btn) => {
     btn.addEventListener('mouseover', (e) => {

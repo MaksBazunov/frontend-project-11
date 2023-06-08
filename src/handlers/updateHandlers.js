@@ -8,15 +8,7 @@ const checkNewPostInResources = (watcherLoadingRSSContent, state) => {
 
   const promises = resources.map((resource) => (
     axios.get(`${proxy}disableCache=true&url=${encodeURIComponent(resource.value)}/`)
-      .catch(() => {
-        state.feedbackMessage = state.i18n.t('updating.errors.errorNetWorkUpdating');
-        throw new Error();
-      })
       .then((response) => parserRSS(response, resource.id))
-      .catch(() => {
-        state.feedbackMessage = state.i18n.t('updating.errors.errorResourceUpdating');
-        throw new Error();
-      })
   ));
 
   Promise.all(promises)

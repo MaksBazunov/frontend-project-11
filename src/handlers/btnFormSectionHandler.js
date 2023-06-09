@@ -5,15 +5,14 @@ import handlerOfLoadingRSSContent from './dataRSSPostsHandler.js';
 
 // eslint-disable-next-line max-len
 
-const handlerOfBtnFormSection = (state, watcherValidationRSSUrl, watcherLoadingRSSContent, watcherActivityBtn, input) => {
+const handlerOfBtnFormSection = (state, watcherValidationRSSUrl, 
+  watcherLoadingRSSContent, watcherActivityBtn, input) => {
   const form = document.querySelector('.rss-form');
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const content = input.value;
-
     validateForm(state.i18n, content)
-     
       .then((rssUrl) => {
         const { resources } = watcherLoadingRSSContent;
         if (!isNewRSSResource(resources, rssUrl)) throw new Error(state.i18n.t('validation.errors.errorUniqRSSUrl'));

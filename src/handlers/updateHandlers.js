@@ -2,7 +2,7 @@
 import axios from 'axios';
 import parserRSS from '../parsers/parserRss.js';
 
-const checkNewPostInResources = (watcherLoadingRSSContent, state) => {
+const checkNewPostInResources = (watcherLoadingRSSContent) => {
   const { topics: oldTopics, resources } = watcherLoadingRSSContent;
   const proxy = 'https://allorigins.hexlet.app/get?';
 

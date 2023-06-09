@@ -5,7 +5,6 @@ import handlerOfLoadingRSSContent from './dataRSSPostsHandler.js';
 
 // eslint-disable-next-line max-len
 
-
 const handlerOfBtnFormSection = (state, watcherValidationRSSUrl, watcherLoadingRSSContent, watcherActivityBtn, input) => {
   const form = document.querySelector('.rss-form');
 
@@ -24,7 +23,6 @@ const handlerOfBtnFormSection = (state, watcherValidationRSSUrl, watcherLoadingR
         watcherActivityBtn.currentProcess = 'loadingRssContent';
         state.feedbackMessage = state.i18n.t('validation.isValid');
         watcherValidationRSSUrl.isValid = true;
-        watcherActivityBtn.currentProcess = 'loadingRssContent';
         return rssUrl;
       })
       .then((rssUrl) => {

@@ -2,10 +2,10 @@
 import axios from 'axios';
 import parserRSS from '../parsers/parserRss.js';
 
+export const proxy = 'https://allorigins.hexlet.app/get?';
+
 const checkNewPostInResources = (watcherLoadingRSSContent) => {
   const { topics: oldTopics, resources } = watcherLoadingRSSContent;
-  const proxy = 'https://allorigins.hexlet.app/get?';
-
   const promises = resources.map((resource) => (
     axios.get(`${proxy}disableCache=true&url=${encodeURIComponent(resource.value)}/`)
       .then((response) => parserRSS(response, resource.id))
@@ -28,6 +28,9 @@ const checkNewPostInResources = (watcherLoadingRSSContent) => {
     })
     .catch(() => {
       watcherLoadingRSSContent.updatingTopics.errorUpdating = true;
+    });
+    Promise.all(promises).finally(() => {
+      setTimeout(() => checkNewPostInResources(watcherLoadingRSSContent), 3000);
     });
 };
 

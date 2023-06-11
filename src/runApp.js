@@ -10,7 +10,7 @@ const runApp = () => {
     lng: 'ru',
     debug: true,
     resources: languages.ru,
-    });
+  });
   const promise = new Promise((resolve) => {
     resolve(i18Instance);
   });

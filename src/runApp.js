@@ -5,15 +5,14 @@ import languages from './resources/languages.js';
 import app from './app.js';
 
 const runApp = () => {
-  
-    const i18Instance = i18next.createInstance();
-    i18Instance.init({
-      lng: 'ru',
-      debug: true,
-      resources: languages.ru,
+  const i18Instance = i18next.createInstance();
+  i18Instance.init({
+    lng: 'ru',
+    debug: true,
+    resources: languages.ru,
     });
-    const promise = new Promise((resolve) => { 
-      resolve(i18Instance);
+  const promise = new Promise((resolve) => {
+    resolve(i18Instance);
   });
   promise.then((i18nInst) => {
     const state = {

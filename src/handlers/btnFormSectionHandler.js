@@ -6,7 +6,7 @@ import handlerOfLoadingRSSContent from './dataRSSPostsHandler.js';
 // eslint-disable-next-line max-len
 const input = document.querySelector('#url-input');
 
-const handlerOfBtnFormSection = (state, watcherValidationRSSUrl,watcherLoadingRSSContent, watcherActivityBtn) => {
+const handlerOfBtnFormSection = (state, watcherValidRSSUrl, watcherLoadRSSContent, watcherBtn) => {
   const form = document.querySelector('.rss-form');
 
   form.addEventListener('submit', (e) => {
@@ -14,25 +14,25 @@ const handlerOfBtnFormSection = (state, watcherValidationRSSUrl,watcherLoadingRS
     const content = input.value;
     validateForm(state.i18n, content)
       .then((rssUrl) => {
-        const { resources } = watcherLoadingRSSContent;
+        const { resources } = watcherLoadRSSContent;
         if (!isNewRSSResource(resources, rssUrl)) throw new Error(state.i18n.t('validation.errors.errorUniqRSSUrl'));
         return rssUrl;
       })
       .then((rssUrl) => {
-        watcherActivityBtn.currentProcess = 'loadingRssContent';
+        watcherBtn.currentProcess = 'loadingRssContent';
         state.feedbackMessage = state.i18n.t('validation.isValid');
-        watcherValidationRSSUrl.isValid = true;
+        watcherValidRSSUrl.isValid = true;
         return rssUrl;
       })
       .then((rssUrl) => {
         // eslint-disable-next-line max-len
-        handlerOfLoadingRSSContent(watcherLoadingRSSContent, watcherActivityBtn, rssUrl, state);
+        handlerOfLoadingRSSContent(watcherLoadRSSContent, watcherBtn, rssUrl, state);
       })
       .catch((error) => {
         console.log(error, 'end');
         state.feedbackMessage = error.message;
-        watcherValidationRSSUrl.isValid = false;
-        watcherActivityBtn.currentProcess = 'fillingRssUrl';
+        watcherValidRSSUrl.isValid = false;
+        watcherBtn.currentProcess = 'fillingRssUrl';
         throw new Error(error);
       });
   });

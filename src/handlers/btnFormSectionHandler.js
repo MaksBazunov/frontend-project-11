@@ -5,8 +5,8 @@ import handlerOfLoadingRSSContent from './dataRSSPostsHandler.js';
 
 // eslint-disable-next-line max-len
 
-const handlerOfBtnFormSection = (state, watcherValidationRSSUrl, 
-  watcherLoadingRSSContent, watcherActivityBtn, input) => {
+const handlerOfBtnFormSection = (
+  state, watcherValidationRSSUrl, watcherLoadingRSSContent, watcherActivityBtn, input) => {
   const form = document.querySelector('.rss-form');
 
   form.addEventListener('submit', (e) => {

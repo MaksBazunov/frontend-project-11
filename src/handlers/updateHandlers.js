@@ -29,9 +29,9 @@ const checkNewPostInResources = (watcherLoadingRSSContent) => {
     .catch(() => {
       watcherLoadingRSSContent.updatingTopics.errorUpdating = true;
     });
-Promise.all(promises).finally(() => {
-  setTimeout(() => checkNewPostInResources(watcherLoadingRSSContent), 3000);
- });
+  Promise.all(promises).finally(() => {
+    setTimeout(() => checkNewPostInResources(watcherLoadingRSSContent), 3000);
+  });
 };
 
 const getCurrentTimerId = (watcher) => watcher.updatingTopics.currentTimerID;

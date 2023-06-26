@@ -2,11 +2,12 @@
 import axios from 'axios';
 import parserRSS from '../parsers/parserRss.js';
 import { getUniqId } from './additionalHandlers.js';
+import proxy from './updateHandlers.js'
 
 // eslint-disable-next-line max-len
 const handlerOfLoadingRSSContent = (watcherLoadingRSSContent, watcherActivityBtn, rssUrl, state) => {
   const id = getUniqId();
-  const newUrl = new URL(`https://allorigins.hexlet.app/get?url=${rssUrl}`);
+  const newUrl = new URL(`${proxy}url=${rssUrl}`);
   newUrl.searchParams.set('disableCache', true);
 
   axios.get(newUrl.toString())

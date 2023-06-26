@@ -2,7 +2,7 @@
 import axios from 'axios';
 import parserRSS from '../parsers/parserRss.js';
 
-export const proxy = 'https://allorigins.hexlet.app/get?';
+const  proxy = 'https://allorigins.hexlet.app/get?';
 
 const checkNewPostInResources = (watcherLoadingRSSContent) => {
   const { topics: oldTopics, resources } = watcherLoadingRSSContent;
@@ -28,9 +28,9 @@ const checkNewPostInResources = (watcherLoadingRSSContent) => {
     })
     .catch(() => {
       watcherLoadingRSSContent.updatingTopics.errorUpdating = true;
-    });
-  Promise.all(promises).finally(() => {
-    setTimeout(() => checkNewPostInResources(watcherLoadingRSSContent), 3000);
+    })
+  .finally(() => {
+    setTimeout(() => checkNewPostInResources(watcherLoadingRSSContent), 5000);
   });
 };
 
@@ -51,7 +51,8 @@ const setTimer = (watcherLoadingRSSContent, state, status) => {
   const wrongTimerId = setTimeout(() => {
     checkNewPostInResources(watcherLoadingRSSContent, state);
     watcherLoadingRSSContent.updatingTopics.currentTimerID = wrongTimerId;
-  }, 30000);
+  }, 5000);
 };
 
-export { setTimer, checkNewPostInResources, getCurrentTimerId };
+export  { setTimer, checkNewPostInResources, getCurrentTimerId };
+export default proxy;

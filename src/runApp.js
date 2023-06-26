@@ -4,9 +4,9 @@ import i18next from 'i18next';
 import languages from './resources/languages.js';
 import app from './app.js';
 
-const runApp = () => {
-  const i18Instance = i18next.createInstance();
-  i18Instance.init({
+const runApp = async () => {
+  const i18Instance =  i18next.createInstance();
+  await i18Instance.init({
     lng: 'ru',
     debug: true,
     resources: languages.ru,
@@ -39,14 +39,15 @@ const runApp = () => {
         isValid: null,
       },
     };
-    return state;
-  })
-    .then((state) => {
-      app(state);
-    })
-    .catch((e) => {
-      console.log(e, 'error in init');
-    });
+  
+return app(state)
+})
+.then((state) => {
+  app(state);
+})
+.catch((e) => {
+  console.log(e, 'error in init');
+});
 };
 
 export default runApp();

@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 import { setLocale } from 'yup';
-
+import isNewRSSResource from '../validators/newRSSResource.js';
 const validateForm = (i18n, content) => {
   console.log(content, 'content');
   setLocale({

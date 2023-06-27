@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import validateForm from '../validators/formValidator.js';
-import isNewRSSResource from '../validators/newRSSResource.js';
 import handlerOfLoadingRSSContent from './dataRSSPostsHandler.js';
 
 // eslint-disable-next-line max-len

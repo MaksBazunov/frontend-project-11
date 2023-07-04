@@ -51,7 +51,7 @@ const setTimer = (watcherLoadingRSSContent, state, status) => {
   const wrongTimerId = setTimeout(() => {
     checkNewPostInResources(watcherLoadingRSSContent, state);
     watcherLoadingRSSContent.updatingTopics.currentTimerID = wrongTimerId;
-  }, 5000);
+  }, 30000);
 };
 
 export  { setTimer, checkNewPostInResources, getCurrentTimerId };

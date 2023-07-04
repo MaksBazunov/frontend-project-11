@@ -30,7 +30,7 @@ const checkNewPostInResources = (watcherLoadingRSSContent) => {
       watcherLoadingRSSContent.updatingTopics.errorUpdating = true;
     })
   .finally(() => {
-    setTimeout(() => checkNewPostInResources(watcherLoadingRSSContent), 3000);
+    setTimeout(() => checkNewPostInResources(watcherLoadingRSSContent), 5000);
   });
 };
 

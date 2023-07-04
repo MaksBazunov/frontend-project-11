@@ -30,7 +30,7 @@ const checkNewPostInResources = (watcherLoadingRSSContent) => {
       watcherLoadingRSSContent.updatingTopics.errorUpdating = true;
     })
   .finally(() => {
-    setTimeout(() => checkNewPostInResources(watcherLoadingRSSContent), 6000);
+    setTimeout(() => checkNewPostInResources(watcherLoadingRSSContent), 5000);
   });
 };
 
@@ -44,14 +44,14 @@ const setTimer = (watcherLoadingRSSContent, state, status) => {
     const correctTimerId = setTimeout(() => {
       checkNewPostInResources(watcherLoadingRSSContent, state);
       watcherLoadingRSSContent.updatingTopics.currentTimerID = correctTimerId;
-    }, 6000);
+    }, 5000);
     return;
   }
 
   const wrongTimerId = setTimeout(() => {
     checkNewPostInResources(watcherLoadingRSSContent, state);
     watcherLoadingRSSContent.updatingTopics.currentTimerID = wrongTimerId;
-  }, 6000);
+  }, 5000);
 };
 
 export  { setTimer, checkNewPostInResources, getCurrentTimerId };

@@ -55,4 +55,3 @@ const setTimer = (watcherLoadingRSSContent, state, status) => {
 };
 
 export  { setTimer, checkNewPostInResources, getCurrentTimerId };
-export default proxy;

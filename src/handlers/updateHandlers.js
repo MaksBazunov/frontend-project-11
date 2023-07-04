@@ -29,8 +29,8 @@ const checkNewPostInResources = (watcherLoadingRSSContent) => {
     .catch(() => {
       watcherLoadingRSSContent.updatingTopics.errorUpdating = true;
     })
-    Promise.all(promises).finally(() => {
-    setTimeout(() => checkNewPostInResources(watcherLoadingRSSContent), 5000);
+  .finally(() => {
+    setTimeout(() => checkNewPostInResources(watcherLoadingRSSContent), 3000);
   });
 };
 

@@ -26,11 +26,11 @@ const watcherLoadingRssContent = (state) => {
   const watcher = onChange(state.resultOfRssContentLoading, (path, value) => {
     switch (path) {
       case ('errorLoading'):
-        if (value) {
+        if (value === true) {
           renderFeedbackOfFormSetion(false, state.feedbackMessage);
           switchToDefaultValue(watcher, path);
         }
-        if (!value) {
+        if (value === false) {
           renderRssContent(watcher, state.i18n);
           renderFeedbackOfFormSetion(true, state.feedbackMessage);
           handlerOfmodalWindowOpeningBtns(watcher);
@@ -39,11 +39,11 @@ const watcherLoadingRssContent = (state) => {
         }
         break;
       case ('updatingTopics.errorUpdating'):
-        if (value) {
+        if (value === true) {
           setTimer(watcher, state, false);
           switchToDefaultValue(watcher.updatingTopics, 'errorUpdating');
         }
-        if (!value) {
+        if (value === false) {
           renderRssContent(watcher, state.i18n);
           handlerOfmodalWindowOpeningBtns(watcher);
           switchToDefaultValue(watcher.updatingTopics, 'errorUpdating');
@@ -69,4 +69,3 @@ export {
   watcherValidationRssURL, watcherActivityButton,
   watcherLoadingRssContent,
 };
-

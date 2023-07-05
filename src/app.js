@@ -1,7 +1,10 @@
 /* eslint-disable max-len */
 import handlerOfBtnFormSection from './handlers/btnFormSectionHandler.js';
 import { handlerOfLinkOpeningBtn } from './handlers/modalHandlers.js';
-import {watcherValidationRssURL, watcherLoadingRssContent, watcherActivityButton}  from './view/watchers.js';
+import {
+  watcherValidationRssURL, watcherActivityButton,
+  watcherLoadingRssContent,
+} from './view/watchers.js';
 
 const app = (state) => {
   const watcherValidationRSSUrl = watcherValidationRssURL(state);
